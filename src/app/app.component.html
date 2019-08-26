@@ -1,0 +1,53 @@
+<div class="container-fluid">
+		<mat-toolbar style="min-height: 10px; max-height: 100px;" color="primary">
+		<mat-toolbar-row>
+		<span>
+			<img class="png-icon"  src="/assets/images/profile-icon.png" style="max-width:19%;">
+			ProfileWise
+		</span>
+		<button mat-button *ngIf="!authService.isUserLoggedIn()" routerLink="/login">Login</button>
+		<button mat-button *ngIf="!authService.isUserLoggedIn()" routerLink="/addUser">SignUp</button>	
+		<button mat-button *ngIf="authService.isUserLoggedIn()" routerLink="/users">Home</button>	
+		<button mat-button *ngIf="authService.isUserLoggedIn()" [routerLink]="['/userCard', 'all']">Profile</button>	
+		<button mat-button *ngIf="authService.isUserLoggedIn()" routerLink="/logout">Logout</button>
+	</mat-toolbar-row>
+</mat-toolbar>
+<br/>
+<router-outlet></router-outlet>
+</div>
+
+
+<!--
+<div class="container-fluid">
+	<div class="col-md-offset-1">
+		<h2>
+			Player Portal
+		</h2>
+	</div>
+	<br/>
+	<a *ngIf="!authService.isUserLoggedIn()" routerLink="/login"> Login</a>
+	<a *ngIf="!authService.isUserLoggedIn()" style="margin-left:10px" routerLink="/addUser"> SignUp</a>
+	<a *ngIf="authService.isUserLoggedIn()" style="margin-left:10px" routerLink="/users"> Home</a>
+	<a *ngIf="authService.isUserLoggedIn()" style="margin-left:10px" routerLink="/usersCard"> Profile</a>
+	<a *ngIf="authService.isUserLoggedIn()" style="margin-left:10px" routerLink="/logout"> Logout</a>
+	<br/>
+	<router-outlet></router-outlet>
+</div>
+-->
+
+<!--
+<mat-toolbar color="primary">
+		<mat-toolbar-row>
+		  <h1>Player Portal</h1>
+		  <span class="menu-spacer"></span>
+		  <div>
+			<a mat-button *ngIf="!authService.isUserLoggedIn()" [routerLink]="'/login'"> Login </a>
+			<a mat-button *ngIf="!authService.isUserLoggedIn()" [routerLink]="'/addUser'"> SignUp </a>
+			<a mat-button *ngIf="authService.isUserLoggedIn()" [routerLink]="'/users'"> Home </a>
+			<a mat-button *ngIf="authService.isUserLoggedIn()" [routerLink]="'/usersCard'"> Profile </a>
+			<a mat-button *ngIf="authService.isUserLoggedIn()" [routerLink]="'/logout'"> Logout </a>
+	  
+		  </div>
+		</mat-toolbar-row>
+</mat-toolbar>
+-->

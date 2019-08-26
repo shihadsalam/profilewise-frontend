@@ -1,0 +1,96 @@
+<form [formGroup]="careerForm" autocomplete="off" novalidate (ngSubmit)="createUserCareer()" fxLayout="column wrap"
+	  fxLayoutAlign="center center" fxLayoutGap="10px">
+
+	<mat-card>
+		<mat-card-content>
+		  <form>
+			<table>
+			  <tr>
+				<td>
+				 <div [formGroup]="careerForm">
+				 <mat-form-field>
+				  <input matInput type="number" placeholder="Matches" [(ngModel)]="userCareer.matches" formControlName="matches" name="matches" id="matches">
+				  <mat-error *ngIf="hasError('matches', 'required')">Matches required</mat-error>
+				</mat-form-field>
+				</div>
+				</td>
+			  </tr>
+			<tr>
+			  <td>
+				<div [formGroup]="careerForm">
+				  <mat-form-field>
+				<input matInput type="number" placeholder="Runs" [(ngModel)]="userCareer.runs" formControlName="runs" type="runs" name="runs" id="runs">
+				<mat-error *ngIf="hasError('runs', 'required')">Runs required</mat-error>  
+				</mat-form-field>
+				</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					  <div [formGroup]="careerForm">
+						<mat-form-field>
+					  <input matInput type="number" placeholder="Batting Average" [(ngModel)]="userCareer.battingAvg" formControlName="battingAvg" type="battingAvg" name="battingAvg" id="battingAvg">
+					  <mat-error *ngIf="hasError('battingAvg', 'required')">Batting Average required</mat-error>  
+					  </mat-form-field>
+					  </div>
+				</td>
+			</tr>
+			<tr>
+					<td>
+						  <div [formGroup]="careerForm">
+							<mat-form-field>
+						  <input matInput type="number" placeholder="High Score" [(ngModel)]="userCareer.highScore" formControlName="highScore" type="highScore" name="highScore" id="highScore">
+						  <mat-error *ngIf="hasError('highScore', 'required')">High Score required</mat-error>  
+						  </mat-form-field>
+						  </div>
+					</td>
+				</tr>
+				<tr>
+						<td>
+							  <div [formGroup]="careerForm">
+								<mat-form-field>
+							  <input matInput type="number" placeholder="Wickets" [(ngModel)]="userCareer.wickets" formControlName="wickets" type="wickets" name="wickets" id="wickets">
+							  <mat-error *ngIf="hasError('wickets', 'required')">Wickets required</mat-error>  
+							  </mat-form-field>
+							  </div>
+						</td>
+					</tr>
+					<tr>
+							<td>
+								  <div [formGroup]="careerForm">
+									<mat-form-field>
+								  <input matInput type="number" placeholder="Bowling Average" [(ngModel)]="userCareer.bowlingAvg" formControlName="bowlingAvg" type="bowlingAvg" name="bowlingAvg" id="bowlingAvg">
+								  <mat-error *ngIf="hasError('bowlingAvg', 'required')">Bowling Average required</mat-error>  
+								  </mat-form-field>
+								  </div>
+							</td>
+					</tr>
+					<tr>
+							<td>
+								  <div [formGroup]="careerForm">
+									<mat-form-field>
+								  <input matInput type="text" placeholder="Best Bowling" [(ngModel)]="userCareer.bestBowling" formControlName="bestBowling" type="bestBowling" name="highScore" id="bestBowling">
+								  <mat-error *ngIf="hasError('bestBowling', 'required')">Best Bowling required</mat-error>  
+								  </mat-form-field>
+								  </div>
+							</td>
+						</tr>
+						<tr>
+									<td>
+										  <div [formGroup]="careerForm">
+											<mat-form-field>
+										  <input matInput type="number" placeholder="Catches" [(ngModel)]="userCareer.catches" formControlName="catches" type="catches" name="catches" id="catches">
+										  <mat-error *ngIf="hasError('catches', 'required')">Catches required</mat-error>  
+										  </mat-form-field>
+										  </div>
+									</td>
+						</tr>
+		
+		</table>
+		  </form>
+		</mat-card-content>
+		<mat-card-actions>
+		  <button mat-raised-button color="primary" [disabled]="!careerForm.valid">Submit</button>
+		</mat-card-actions>
+	  </mat-card>
+</form>

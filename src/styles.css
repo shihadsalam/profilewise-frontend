@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+mat-form-field{
+    width: 400px;
+}
+mat-card-title{
+    text-align: center;
+}
+
+.mat-table__wrapper .mat-table {
+    min-width: auto !important;
+    width: 100% !important;
+}
+
+.mat-header-row {
+    width: 100%;
+}
+
+.mat-row {
+    width: 100%;
+}
+
+.mat-column-email {
+    flex: 0 0 15% !important;
+    min-width: 50px !important;
+}
+
+.mat-column-imageIcon {
+    flex: 0 0 7%;
+    min-width: 10px !important;
+}

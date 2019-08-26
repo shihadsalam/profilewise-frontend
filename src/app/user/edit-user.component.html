@@ -1,0 +1,94 @@
+<form [formGroup]="editUserForm" autocomplete="off" novalidate
+	(ngSubmit)="editUser()" fxLayout="column wrap"
+	fxLayoutAlign="center center" fxLayoutGap="10px">
+
+	<mat-card> <mat-card-content>
+	<form>
+		<table>
+			<tr>
+				<td>
+					<div [formGroup]="editUserForm">
+						<mat-form-field> <input matInput
+							placeholder="First Name" [(ngModel)]="user.firstName"
+							formControlName="firstName" name="firstName" id="firstName">
+						<mat-error *ngIf="hasError('firstName',
+						'required')">
+						First Name is required</mat-error></mat-form-field>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div [formGroup]="editUserForm">
+						<mat-form-field> <input matInput
+							placeholder="Last Name" [(ngModel)]="user.lastName"
+							formControlName="lastName" name="lastName" id="lastName">
+						<mat-error *ngIf="hasError('lastName',
+						'required')">
+						Last Name is required</mat-error></mat-form-field>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div [formGroup]="editUserForm">
+						<mat-form-field> <input matInput
+							[matDatepicker]="picker" placeholder="Date Of Birth"
+							formControlName="dob" [(ngModel)]="user.dob" id="dob" readonly
+							(click)="picker.open()"> <mat-datepicker-toggle matSuffix
+							[for]="picker"></mat-datepicker-toggle> <mat-datepicker #picker></mat-datepicker>
+						</mat-form-field>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div [formGroup]="editUserForm">
+						<mat-form-field> <input matInput
+							placeholder="User Name" [(ngModel)]="user.username"
+							formControlName="username" name="username" id="username">
+						<mat-error *ngIf="hasError('username',
+						'required')">
+						User Name is required</mat-error></mat-form-field>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div [formGroup]="editUserForm">
+						<mat-form-field> <input matInput
+							placeholder="Email" [(ngModel)]="user.email"
+							formControlName="email" name="email" id="email"> <mat-error
+							*ngIf="hasError('email', 'required')"> Email is
+						required</mat-error> <mat-error *ngIf="hasError('email', 'email')">Invalid
+						Email</mat-error></mat-form-field>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div [formGroup]="editUserForm">
+						<mat-form-field> <mat-label>Country</mat-label> <mat-select
+							placeholder="Country" formControlName="country" name="country"
+							id="country" [(ngModel)]="user.country"> <mat-option
+							*ngFor="let country of countries" [value]="country">{{country}}</mat-option>
+						</mat-select> <mat-error *ngIf="hasError('country', 'required')">Country
+						is required</mat-error> </mat-form-field>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div [formGroup]="editUserForm">
+						<mat-checkbox placeholder="Admin" formControlName="isAdmin"
+							id="isAdmin" name="isAdmin" [(ngModel)]="user.isAdmin">Admin</mat-checkbox>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</form>
+	</mat-card-content> <mat-card-actions>
+	<button mat-raised-button color="primary"
+		[disabled]="!editUserForm.valid">Update</button>
+	</mat-card-actions> </mat-card>
+</form>

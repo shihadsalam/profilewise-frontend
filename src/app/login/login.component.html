@@ -1,0 +1,39 @@
+
+<form [formGroup]="loginForm" autocomplete="off" novalidate (ngSubmit)="login()" fxLayout="column wrap"
+	  fxLayoutAlign="center center" fxLayoutGap="10px">
+
+	<mat-card>
+		<mat-card-content>
+		  <form>
+			<table>
+			  <tr>
+				<td>
+				 <div [formGroup]="loginForm">
+				 <mat-form-field>
+				  <input matInput placeholder="Username" [(ngModel)]="loginUser.username" formControlName="username" name="username" id="username">
+				  <mat-hint>Not more then 10 characters long.</mat-hint>
+				  <mat-error *ngIf="hasError('username', 'required')">Username is required</mat-error>
+				  <mat-error *ngIf="hasError('username', 'maxlength')">You have more than 10 characters</mat-error>  
+				</mat-form-field>
+				</div>
+				</td>
+			  </tr>
+			  <tr>
+			  <td>
+				<br/>
+				<div [formGroup]="loginForm">
+				  <mat-form-field>
+				<input matInput placeholder="Password" [(ngModel)]="loginUser.password" formControlName="password" type="password" name="password" id="password">
+				<mat-error *ngIf="hasError('password', 'required')">Password is required</mat-error>  
+			</mat-form-field>
+		</div>
+		</td>
+			</tr></table>
+		  </form>
+		</mat-card-content>
+		<mat-card-actions>
+		  <button mat-raised-button color="primary" [disabled]="!loginForm.valid">Login</button>
+		  <!--<button mat-raised-button color="primary">Login</button>-->
+		</mat-card-actions>
+	  </mat-card>
+</form>
