@@ -2,7 +2,7 @@
 <ngb-alert *ngIf="message && message.errorMsg && !closed" [type]="'danger'" (close)="closed=true">{{message.errorMsg}}</ngb-alert>
 <br>
 <div class="form-group">
-		<label for="comment">JSON Data to Import</label>
+		<label for="comment">Import JSON data for <strong>{{username}}</strong></label>
 		<textarea class="form-control" rows="10" name="json" [(ngModel)]="json"></textarea>
 		<br>
 		<button mat-raised-button color="primary" (click)="importJSON()">Import</button>
