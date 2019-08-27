@@ -1,4 +1,5 @@
-    <div><mat-icon color="primary" style="font-size: 65px">recent_actors</mat-icon></div>
+<div style="color:maroon" class="close" (click)="close()">x</div>
+	<div><mat-icon style="font-size: 65px">art_track</mat-icon></div>
 	<div *ngFor="let map of mapArray">	
 		<mat-table class="mat-elevation-z8" [dataSource]="[map]">
 					<ng-container [matColumnDef]="column.key" *ngFor="let column of map | keyvalue">
@@ -7,12 +8,19 @@
 					</ng-container>
 					<mat-header-row *matHeaderRowDef="({}).constructor.keys(map)"></mat-header-row>
 					<mat-row *matRowDef="let row; columns: ({}).constructor.keys(map)"></mat-row>
-				  </mat-table>
-				  <br/>
-				</div>
-	<mat-dialog-actions>
-	  <button mat-raised-button color="warn" (click)="close()">CLOSE</button>&nbsp;
+		</mat-table>
+		<br/>
+	</div>
+	<mat-dialog-actions *ngIf="mapArray">
+	  <button style="font-size: 12px" mat-raised-button color="warn" (click)="close()">CLOSE</button>&nbsp;
 	</mat-dialog-actions>
+	<br>
+	<div *ngIf="!mapArray">
+		<h5 style="color: brown">No data available !</h5>
+		<p>
+		<br>
+		<h5>Import Career Data  <button style="font-size: 12px" mat-raised-button color="accent" (click)="navigateToImport(username)">HERE</button></h5>
+	</div>
 
 
 <!--

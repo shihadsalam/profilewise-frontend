@@ -2,7 +2,6 @@ import { Component, ViewChild } from "@angular/core";
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../service/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Message } from './message';
 
 @Component({
   templateUrl: './import-career.component.html'

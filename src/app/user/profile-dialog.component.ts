@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import { UserService } from '../service/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './profile-dialog.component.html'
@@ -8,10 +9,10 @@ import { UserService } from '../service/user.service';
 export class ProfileDialogComponent{
 
   username: String = "";
-  mapArray: Map<String, Object>[] = [];
+  mapArray: Map<String, Object>[];
   isDataAvailable: boolean = false;
 
-  constructor(private dialogRef: MatDialogRef<ProfileDialogComponent>, 
+  constructor(private router: Router, private dialogRef: MatDialogRef<ProfileDialogComponent>, 
     @Inject(MAT_DIALOG_DATA) data, private userService: UserService) {
       this.username = data.username;
       this.userService.getImportedUserCareer(this.username).subscribe(data => {
@@ -22,6 +23,11 @@ export class ProfileDialogComponent{
 
   close() {
       this.dialogRef.close();
+  }
+
+  navigateToImport(username) {
+    this.close();
+    this.router.navigate(['importUserCareer', username]);
   }
   
 }

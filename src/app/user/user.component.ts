@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { TokenStorage } from '../service/token.storage';
 import { Router, ActivatedRoute } from '@angular/router';
 import {FileUploader} from 'ng2-file-upload';
@@ -20,7 +20,13 @@ import { Observable } from 'rxjs';
 export class UserComponent {
   
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  sort;
+  @ViewChild(MatSort, {static: false}) set content(content: ElementRef) {
+    this.sort = content;
+    if (this.sort){
+       this.dataSource.sort = this.sort;
+    }
+  }
   displayedColumns = ['imageIcon', 'firstName', 'lastName', 'username', 'dob', 'email', 'country', 'usertype', 'action'];
   dataSource: MatTableDataSource<User>;
   uploader: FileUploader;
