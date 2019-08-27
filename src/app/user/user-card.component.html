@@ -10,10 +10,10 @@
 								 <button style='margin-right:16px' mat-raised-button color="primary" [matMenuTriggerFor]="menu1">Profile</button>
 								 <mat-menu #menu1="matMenu" overlapTrigger="false">
 										<button mat-menu-item (click)="displayProfile(user);">View</button>
+										<button mat-menu-item (click)="hideProfile(user);">Hide</button>
 										<button mat-menu-item [routerLink]="['/addUserCareer', user.username]">Update</button>
 										<button mat-menu-item [routerLink]="['/multiEditUser', user.username]">Multi Update</button>
-										<button mat-menu-item (click)="hideProfile(user);">Hide</button>
-								</mat-menu>
+								  </mat-menu>
 
 								<button style='margin-right:16px' mat-raised-button color="primary" [matMenuTriggerFor]="menu2">Career</button>
 								<mat-menu #menu2="matMenu" overlapTrigger="false">

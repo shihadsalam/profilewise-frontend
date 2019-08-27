@@ -101,6 +101,7 @@ export class UserComponent {
     this.userService.deleteUser(user)
       .subscribe(data => {
         this.users = this.users.filter(u => u !== user);
+        this.dataSource.data = this.users;
         this.deleteMsg = "User " +user.firstName+ " deleted successfully";
         this.openSnackBar(this.deleteMsg, "Success! ");
       })
