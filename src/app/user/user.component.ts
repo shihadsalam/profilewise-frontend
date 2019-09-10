@@ -103,6 +103,10 @@ export class UserComponent {
     this.router.navigate(['/editUser/', {username: userToEdit.username}]);
   }
 
+  navidateToCard(username) {
+    this.router.navigate(['userCard', {username: username}]);
+  }
+
   deleteUser(user: User): void {
     this.userService.deleteUser(user)
       .subscribe(data => {

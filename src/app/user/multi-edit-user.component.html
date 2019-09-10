@@ -211,6 +211,7 @@
 		<td><mat-card-actions>
 			<button mat-raised-button color="primary" (click)="updateUser(user, userCareer)"
 				[disabled]="!editUserForm.valid && !careerForm.valid">Update</button>
+				<button mat-raised-button color="accent" (click)="navidateToCard(user.username)">Back</button>	
 			</mat-card-actions></td>
 	</tr>
 </table>

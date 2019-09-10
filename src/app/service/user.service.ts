@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../user/user';
 import { Message } from '../user/message';
 import { UserCareer } from '../user/user-career';
+import { ProfileGlimpseFields } from '../user/glimpse-fields';
 
 
 const httpOptions = {
@@ -57,6 +58,26 @@ export class UserService {
 
     public getImportedUserCareer(username) {
         return this.http.get<Map<String, Object>[]>(this.userCareerUrl + "/get-imported-career/" + username);
+    }
+
+    public addGlimpseFields(fields) {
+        return this.http.post<Map<String, Object>>(this.userCareerUrl + "/add-glimpse-fields", fields);
+    }
+
+    public addGlimpseRecord(jsonData) {
+        return this.http.post<Message>(this.userCareerUrl + "/add-glimpse-record", jsonData);
+    }
+
+    public getGlimpseRecord(username) {
+        return this.http.get<Map<string, object>>(this.userCareerUrl + "/get-glimpse-records/" + username);
+    }
+
+    public getGlimpseFields(username) {
+        return this.http.get<String[]>(this.userCareerUrl + "/get-glimpse-fields/" + username);
+    }
+
+    public isGlimpseFieldsExists(username) {
+        return this.http.get<Boolean>(this.userCareerUrl + "/check-glimpse-fields/" + username);
     }
 
 }

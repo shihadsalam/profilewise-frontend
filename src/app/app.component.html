@@ -1,5 +1,5 @@
 <div class="container-fluid">
-		<mat-toolbar style="min-height: 10px; max-height: 100px;" color="primary">
+		<mat-toolbar style="min-height: 10px; max-height: 100px; width: 100%;" color="primary">
 		<mat-toolbar-row>
 		<span>
 			<img class="png-icon"  src="/assets/images/profile-icon.png" style="max-width:19%;">
@@ -8,7 +8,7 @@
 		<button mat-button *ngIf="!authService.isUserLoggedIn()" routerLink="/login">Login</button>
 		<button mat-button *ngIf="!authService.isUserLoggedIn()" routerLink="/addUser">SignUp</button>	
 		<button mat-button *ngIf="authService.isUserLoggedIn()" routerLink="/users">Home</button>	
-		<button mat-button *ngIf="authService.isUserLoggedIn()" [routerLink]="['/userCard', 'all']">Profile</button>	
+		<button mat-button *ngIf="authService.isUserLoggedIn()" routerLink="/userCard">Profile</button>	
 		<button mat-button *ngIf="authService.isUserLoggedIn()" routerLink="/logout">Logout</button>
 	</mat-toolbar-row>
 </mat-toolbar>

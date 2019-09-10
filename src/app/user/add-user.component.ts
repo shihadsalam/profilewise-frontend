@@ -17,7 +17,10 @@ export class AddUserComponent {
   public addUserForm: FormGroup
 
   constructor(private router: Router, private userService: UserService) {
-
+    this.userService.getUserNames()
+    .subscribe(usernames => {
+      this.userNames = usernames;
+    });
   }
 
   ngOnInit() {
@@ -30,11 +33,6 @@ export class AddUserComponent {
       email: new FormControl('', [Validators.required, Validators.email]),
       country: new FormControl('', [Validators.required]),
       isAdmin: new FormControl('', [])
-    });
-
-    this.userService.getUserNames()
-    .subscribe(usernames => {
-      this.userNames = usernames;
     });
   }
 

@@ -55,4 +55,8 @@ export class AddUserCareerComponent {
     return this.careerForm.controls[controlName].hasError(errorName);
   }
 
+  navidateToCard(username) {
+    this.router.navigate(['userCard', {username: username}]);
+  }
+
 }

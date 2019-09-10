@@ -79,4 +79,8 @@ export class MultiEditUserComponent {
         this.router.navigate(['users', {msg: this.msg}]);
       });
   };
+
+  navidateToCard(username) {
+    this.router.navigate(['userCard', {username: username}]);
+  }
 }

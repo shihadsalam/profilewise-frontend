@@ -7,14 +7,14 @@
 	  </div>
 	  
 	  <div class="example-container mat-elevation-z8">
-		<mat-table *ngIf="iconsLoaded" [dataSource]="dataSource" matSort>
-				
+		<!--<mat-table *ngIf="iconsLoaded" [dataSource]="dataSource" matSort>-->
+		<mat-table [dataSource]="dataSource" matSort>	
 		<ng-container matColumnDef="imageIcon">
 			<mat-header-cell *matHeaderCellDef>  </mat-header-cell>
 			<mat-cell *matCellDef="let row">
-				<button mat-icon-button [routerLink]="['/userCard', row.username]">
-					<mat-icon svgIcon="{{row.username}}"></mat-icon>
-					<!--<img src="../assets/icons/{{row.username}}.svg" onError="this.src='../assets/icons/default.svg'">-->
+				<button mat-icon-button (click)="navidateToCard(row.username)">
+					<!--<mat-icon svgIcon="{{row.username}}"></mat-icon>-->
+					<mat-icon>account_box</mat-icon>
 				</button>
 			</mat-cell>
 		 </ng-container>

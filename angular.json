@@ -27,6 +27,7 @@
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/bootstrap-4/css/bootstrap.css",
               "src/bootstrap-4/css/bootstrap.min.css",
+              "src/app/styles-app-loading.scss",
               "src/styles.css"
             ],
             "scripts": []

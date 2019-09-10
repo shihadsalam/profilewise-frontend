@@ -29,4 +29,8 @@ export class UploadUserCareerComponent implements OnInit {
     //this.uploader.onCompleteAll = () => {alert('File uploaded'); this.router.navigate(['users', {msg: 'File uploaded'}]);}
   };
 
+  navidateToCard(username) {
+    this.router.navigate(['userCard', {username: username}]);
+  }
+
 }

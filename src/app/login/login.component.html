@@ -1,7 +1,7 @@
 <br>
 <br>
-<form [formGroup]="loginForm" autocomplete="off" novalidate (ngSubmit)="login()" fxLayout="column wrap"
-	  fxLayoutAlign="center center" fxLayoutGap="10px">
+<form [formGroup]="loginForm" autocomplete="off" novalidate (ngSubmit)="login()" 
+	(keydown.enter)="login()" fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
 
 	<mat-card>
 		<mat-card-content>
@@ -12,7 +12,6 @@
 				 <div [formGroup]="loginForm">
 				 <mat-form-field>
 				  <input matInput placeholder="Username" [(ngModel)]="loginUser.username" formControlName="username" name="username" id="username">
-				  <mat-hint>Not more then 10 characters long.</mat-hint>
 				  <mat-error *ngIf="hasError('username', 'required')">Username is required</mat-error>
 				  <mat-error *ngIf="hasError('username', 'maxlength')">You have more than 10 characters</mat-error>  
 				</mat-form-field>

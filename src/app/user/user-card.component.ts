@@ -26,16 +26,16 @@ export class UserCardComponent {
             this.dataSource = new MatTableDataSource();
             route.params.subscribe(params => {
                 this.username = params['username'];
-                if (this.username == 'all') {
-                    this.userService.getUsers().subscribe(data => {
-                        this.users = data;
+                if (this.username) {
+                    this.userService.getUserByUsername(this.username).
+                    subscribe(data => {
+                        this.users.push(data);
                         this.dataSource.data = this.users;
                     });
                 }
                 else {
-                    this.userService.getUserByUsername(this.username).
-                    subscribe(data => {
-                        this.users.push(data);
+                    this.userService.getUsers().subscribe(data => {
+                        this.users = data;
                         this.dataSource.data = this.users;
                     });
                 }

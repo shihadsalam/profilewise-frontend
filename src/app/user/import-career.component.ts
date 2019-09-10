@@ -40,5 +40,9 @@ export class ImportCareerComponent {
         }
       });
   };
+
+  navidateToCard(username) {
+    this.router.navigate(['userCard', {username: username}]);
+  }
   
 }

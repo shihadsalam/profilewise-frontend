@@ -46,7 +46,7 @@
 							placeholder="User Name" [(ngModel)]="user.username"
 							formControlName="username" name="username" id="username">
 						<mat-error *ngIf="hasError('username',
-						'required')"> User Name is required</mat-error> <mat-error *ngIf="isUserExists('username')">User Name already exists
+						'required')"> User Name is required</mat-error> <mat-error *ngIf="isUserExists(this.user.username)">User Name already exists
 						</mat-error></mat-form-field>
 					</div>
 				</td>
@@ -93,7 +93,7 @@
 		</table>
 	</form>
 	</mat-card-content> <mat-card-actions>
-	<button mat-raised-button color="primary"
-		[disabled]="!addUserForm.valid">Submit</button>
+	<button mat-raised-button color="primary" [disabled]="!addUserForm.valid">Submit</button>
+	<button mat-raised-button color="accent" [routerLink]="['/login']" >Back</button>
 	</mat-card-actions> </mat-card>
 </form>

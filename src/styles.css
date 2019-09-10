@@ -28,3 +28,7 @@ mat-card-title{
     flex: 0 0 7%;
     min-width: 10px !important;
 }
+
+.mat-snack-bar-container {
+    min-width: 500px !important;
+ }

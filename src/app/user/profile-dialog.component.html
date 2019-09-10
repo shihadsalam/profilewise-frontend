@@ -11,16 +11,15 @@
 		</mat-table>
 		<br/>
 	</div>
-	<mat-dialog-actions *ngIf="mapArray">
-	  <button style="font-size: 12px" mat-raised-button color="warn" (click)="close()">CLOSE</button>&nbsp;
-	</mat-dialog-actions>
-	<br>
-	<div *ngIf="!mapArray">
-		<h5 style="color: brown">No data available !</h5>
+	<div *ngIf="!isDataAvailable">
+		<h5 style="color: brown">No data available for {{username}} !</h5>
 		<p>
 		<br>
-		<h5>Import Career Data  <button style="font-size: 12px" mat-raised-button color="accent" (click)="navigateToImport(username)">HERE</button></h5>
+		<h5 style="color: indigo">Import Career Data  <button style="font-size: 12px" mat-raised-button color="accent" (click)="navigateToImport(username)"><strong style="color: indigo">HERE</strong></button></h5>
 	</div>
+	<mat-dialog-actions *ngIf="isDataAvailable">
+		<button style="font-size: 12px" mat-raised-button color="warn" (click)="close()">CLOSE</button>&nbsp;
+	</mat-dialog-actions>
 
 
 <!--

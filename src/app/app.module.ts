@@ -13,6 +13,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { UserComponent } from './user/user.component';
 import { AddUserCareerComponent } from './user/add-user-career.component';
+import { DefineGlimpseComponent } from './user/define-glimpse.component';
+import { AddGlimpseComponent } from './user/add-glimpse.component';
 import { UploadUserCareerComponent } from './user/upload-user-career.component';
 import { ImportCareerComponent } from './user/import-career.component';
 import { UserCardComponent } from './user/user-card.component';
@@ -51,6 +53,8 @@ export const MY_FORMATS = {
     LoginComponent,
     LogoutComponent,
     AddUserComponent,
+    DefineGlimpseComponent,
+    AddGlimpseComponent,
     AddUserCareerComponent,
     ProfileDialogComponent,
     UploadUserCareerComponent,

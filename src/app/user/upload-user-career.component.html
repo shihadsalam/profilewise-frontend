@@ -2,8 +2,6 @@
 <br>
 <div class="container">
 	<input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
-	<button type="button" class="btn btn-success" 
-	  (click)="uploader.uploadAll()" >
-		  Upload JSON File
-	</button>
+	<button mat-raised-button color="primary" (click)="uploader.uploadAll()">Upload JSON File</button>
+	<button mat-raised-button color="accent" (click)="navidateToCard(username)">Back</button>	
   </div>
