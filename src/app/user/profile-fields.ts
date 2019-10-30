@@ -1,7 +1,8 @@
 
-export class ProfileGlimpseFields {
+export class ProfileFields {
     constructor(
-      public id: String = "",
+      public username: String = "",
+      public type: String = "",
       public field1: String = "",
       public field2: String = "",
       public field3: String = "",
@@ -9,7 +10,9 @@ export class ProfileGlimpseFields {
       public field5: String = "",
       public field6: String = "",
       public field7: String = "",
-      public field8: String = ""
+      public field8: String = "",
+      public field9: String = "",
+      public field10: String = ""
     ) 
     {}
   }

@@ -8,14 +8,14 @@ import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-user',
-  templateUrl: './upload-user-career.component.html',
+  templateUrl: './upload-user-profile.html',
   styles: []
 })
-export class UploadUserCareerComponent implements OnInit {
+export class UploadUserProfileComponent implements OnInit {
   
   uploader: FileUploader;
   username: string = "";
-  private userCareerUploadUrl = 'http://localhost:8088/user-career/json-upload"';
+  private url = 'http://localhost:8088/user-profile/json-upload"';
 
   constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private token: TokenStorage) {
     route.params.subscribe(params => {
@@ -25,7 +25,7 @@ export class UploadUserCareerComponent implements OnInit {
 
   ngOnInit() {
     const headers = [{name: 'Accept', value: 'application/json'}];
-    this.uploader = new FileUploader({url: this.userCareerUploadUrl, autoUpload: true, headers: headers});
+    this.uploader = new FileUploader({url: this.url, autoUpload: true, headers: headers});
     //this.uploader.onCompleteAll = () => {alert('File uploaded'); this.router.navigate(['users', {msg: 'File uploaded'}]);}
   };
 

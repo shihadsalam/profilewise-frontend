@@ -1,0 +1,94 @@
+<br/>
+<div style="margin-right: 20px;" align="right">Logged-In User: <strong style="color: indigo">{{currentUser}}</strong></div>
+<div class="example-header">	
+	<mat-form-field>
+		  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+		</mat-form-field>
+	  </div>
+	  <div class="example-container mat-elevation-z8">
+		<!--<mat-table *ngIf="iconsLoaded" [dataSource]="dataSource" matSort>-->
+		<mat-table [dataSource]="dataSource" matSort>	
+		<ng-container matColumnDef="imageIcon">
+			<mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				<button mat-icon-button (click)="navidateToCard(row.username)">
+					<!--<mat-icon svgIcon="{{row.username}}"></mat-icon>-->
+					<mat-icon color="primary">account_box</mat-icon>
+				</button>
+			</mat-cell>
+		 </ng-container>
+		  
+
+		  <ng-container matColumnDef="firstName">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.firstName}} </mat-cell>
+		  </ng-container>
+
+		  <ng-container matColumnDef="lastName">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.lastName}} </mat-cell>
+		  </ng-container>
+
+		  <ng-container matColumnDef="username">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.username}} </mat-cell>
+	  	</ng-container>
+
+		  <ng-container matColumnDef="gender">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.gender}} </mat-cell>
+		  </ng-container>
+	  
+		  <ng-container matColumnDef="dob">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> DOB </mat-header-cell>
+			<mat-cell *matCellDef="let row"> {{row.dob | date:'MMM dd, yyyy'}} </mat-cell>
+		  </ng-container>
+		  
+		  <ng-container matColumnDef="email">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+				<mat-cell *matCellDef="let row"> {{row.userContact.email}} </mat-cell>
+		  </ng-container>
+
+		  <ng-container matColumnDef="role">
+				<mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
+				<mat-cell *matCellDef="let row"> {{row.userRole}} </mat-cell>
+			  </ng-container>
+			  
+			  <ng-container matColumnDef="usertype">
+					<mat-header-cell *matHeaderCellDef mat-sort-header> User Type </mat-header-cell>
+					<mat-cell *matCellDef="let row"> {{row.isSupervisor?'Supervisor':'User'}} </mat-cell>
+			  </ng-container>
+			  
+			  <ng-container matColumnDef="action">
+				<mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+				<mat-cell *matCellDef="let row; let i=index;">					
+				<button disabled="{{!isCurrentUserSupervisor}}" *ngIf="!row.supervisor" mat-icon-button color="primary" (click)="assignAsReportee(row)">
+					<mat-icon title="Assign as Reportee">how_to_reg</mat-icon>
+				</button>
+				<button disabled="{{!isCurrentUserSupervisor}}" *ngIf="row.supervisor && row.supervisor.username == currentUser" mat-icon-button color="primary" (click)="removeReportee(row)">
+					<mat-icon title="Remove Reportee">person_add_disabled</mat-icon>
+				</button>
+				<!--	
+				<button mat-icon-button color="primary" [routerLink]="['/editUser', row.username]">
+						<mat-icon title="Edit this User" aria-label="Edit">edit</mat-icon>
+				</button>
+				-->
+				<button mat-icon-button color="warn" (click)="deleteUser(row)">
+					<mat-icon title="Delete this User" aria-label="Delete">delete</mat-icon>
+				</button>
+					
+				</mat-cell>
+			  </ng-container>
+
+			  <ng-container matColumnDef="status">
+					<mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+					<mat-cell *matCellDef="let row"> {{row.username == currentUser ? 'Self' : (row.supervisor && row.supervisor.username == currentUser ? 'Reportee' : 'Non-Reportee')}} </mat-cell>
+			  </ng-container>
+	  
+		  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		  <mat-row *matRowDef="let row; columns: displayedColumns;">
+		  </mat-row>
+		</mat-table>
+	  
+		<mat-paginator [pageSizeOptions]="[4, 10, 20, 50, 100]"></mat-paginator>
+	  </div>

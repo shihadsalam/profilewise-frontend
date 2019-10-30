@@ -1,0 +1,68 @@
+<div style="color:maroon" class="close" (click)="close()">x</div>
+	<div><mat-icon style="font-size: 65px">art_track</mat-icon></div>
+	<div *ngFor="let title of titles">	
+		<h6 style="color: indigo">{{title}}</h6>
+		<mat-table class="mat-elevation-z8" [dataSource]="[map[title]]">	
+			<ng-container [matColumnDef]="column.key" *ngFor="let column of map[title] | keyvalue">
+				<mat-header-cell *matHeaderCellDef>{{ column.key!='Text'?column.key:'' }}</mat-header-cell>
+				<mat-cell *matCellDef="let element">{{ column.key!='Text'?column.value:'' }}</mat-cell>
+			</ng-container>
+			<mat-header-row *matHeaderRowDef="({}).constructor.keys(map[title])"></mat-header-row>
+			<mat-row *matRowDef="let row; columns: ({}).constructor.keys(map[title])"></mat-row>
+		</mat-table>
+		<br/>
+	</div>
+
+	<mat-dialog-actions>
+		<button style="font-size: 12px" mat-raised-button color="warn" (click)="close()">CLOSE</button>&nbsp;
+	</mat-dialog-actions>
+
+
+<!--
+
+	<div style="color:maroon" class="close" (click)="close()">x</div>
+	<div><mat-icon style="font-size: 65px">art_track</mat-icon></div>
+	<div *ngFor="let map of mapArray">	
+		<h6 style="color: indigo">{{map['Text']}}</h6>
+		<mat-table class="mat-elevation-z8" [dataSource]="[map]">	
+			<ng-container [matColumnDef]="column.key" *ngFor="let column of map | keyvalue">
+				<mat-header-cell *matHeaderCellDef>{{ column.key!='Text'?column.key:'' }}</mat-header-cell>
+				<mat-cell *matCellDef="let element">{{ column.key!='Text'?column.value:'' }}</mat-cell>
+			</ng-container>
+			<mat-header-row *matHeaderRowDef="({}).constructor.keys(map)"></mat-header-row>
+			<mat-row *matRowDef="let row; columns: ({}).constructor.keys(map)"></mat-row>
+		</mat-table>
+		<br/>
+	</div>
+
+	<mat-dialog-actions>
+		<button style="font-size: 12px" mat-raised-button color="warn" (click)="close()">CLOSE</button>&nbsp;
+	</mat-dialog-actions>
+
+
+<div>
+	<h5 mat-dialog-title>{{'Career: ' + username}}</h5>
+	<mat-dialog-content>
+			<table *ngFor="let map of mapArray" class="table table-striped  table-hover">
+					<thead>
+						<tr>
+							<th *ngFor="let career of map | keyvalue" style="width: fit-content">{{career.key}}</th>
+						</tr>
+					</thead>
+						<tbody>
+							<tr>
+								<td *ngFor="let career of map | keyvalue" style="width: fit-content">{{career.value}}</td>
+							</tr>
+						</tbody>
+				</table>
+				<div *ngIf="!isDataAvailable"> 
+						<h5 mat-dialog-title style="color: brown">Career data not available</h5>
+				</div>
+	</mat-dialog-content>
+	<mat-dialog-actions>
+	  <button mat-raised-button (click)="close()">CLOSE</button>&nbsp;
+	</mat-dialog-actions>
+  </div>
+
+
+-->

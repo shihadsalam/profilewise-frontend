@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { User } from '../user/user';
 import { Message } from '../user/message';
-import { UserCareer } from '../user/user-career';
-import { ProfileGlimpseFields } from '../user/glimpse-fields';
+import { ProfileFields } from '../user/profile-fields';
+import { Observable } from 'rxjs';
 
 
 const httpOptions = {
@@ -17,7 +17,7 @@ export class UserService {
     constructor(private http: HttpClient) { }
 
     private userUrl = 'http://localhost:8088/users';
-    private userCareerUrl = 'http://localhost:8088/user-career';
+    private userProfileUrl = 'http://localhost:8088/users';
     //private userUrl = '/users';
 
     public getUsers() {
@@ -32,8 +32,8 @@ export class UserService {
         return this.http.get<String[]>(this.userUrl+ "/get-all-usernames");
     }
 
-    public deleteUser(user) {
-        return this.http.delete(this.userUrl + "/" + user.username);
+    public deleteUser(username) {
+        return this.http.delete(this.userUrl + "/" + username);
     }
 
     public createUser(user) {
@@ -44,40 +44,43 @@ export class UserService {
         return this.http.put<User>(this.userUrl + "/edit-user", user);
     }
 
-    public createUserCareer(userCareer, username) {
-        return this.http.post<User>(this.userCareerUrl + "/create-career", {userCareer, username});
+    public assignAsReportee(user) {
+        return this.http.post<Message>(this.userUrl + "/assign-reportee", user);
     }
 
-    public getUserCareer(username) {
-        return this.http.get<UserCareer>(this.userCareerUrl + "/" + username);
+    public removeReportee(user) {
+        return this.http.post<Message>(this.userUrl + "/remove-reportee", user);
     }
 
-    public importUserCareer(json, username) {
-        return this.http.post<Message>(this.userCareerUrl + "/import-career", {json, username});
+    public getProfileFields(username, type) {
+        return this.http.get<String[]>(this.userProfileUrl + "/get-profile-fields/" + username + "/" + type);
     }
 
-    public getImportedUserCareer(username) {
-        return this.http.get<Map<String, Object>[]>(this.userCareerUrl + "/get-imported-career/" + username);
+    public getProfileFieldsAsMap(username) {
+        return this.http.get<Map<String, String[]>>(this.userProfileUrl + "/get-profile-fields-map/" + username);
     }
 
-    public addGlimpseFields(fields) {
-        return this.http.post<Map<String, Object>>(this.userCareerUrl + "/add-glimpse-fields", fields);
+    public addProfileFields(fields) {
+        return this.http.post<Message>(this.userProfileUrl + "/add-profile-fields", fields);
     }
 
-    public addGlimpseRecord(jsonData) {
-        return this.http.post<Message>(this.userCareerUrl + "/add-glimpse-record", jsonData);
+    public getProfileRecords(username) {
+        return this.http.get<Map<String, Map<string, object>>>(this.userProfileUrl + "/get-profile-records/" + username);
     }
 
-    public getGlimpseRecord(username) {
-        return this.http.get<Map<string, object>>(this.userCareerUrl + "/get-glimpse-records/" + username);
+    public addProfileRecords(jsonData, username) {
+        return this.http.post<Message>(this.userProfileUrl + "/add-profile-records/" + username, jsonData);
     }
 
-    public getGlimpseFields(username) {
-        return this.http.get<String[]>(this.userCareerUrl + "/get-glimpse-fields/" + username);
-    }
-
-    public isGlimpseFieldsExists(username) {
-        return this.http.get<Boolean>(this.userCareerUrl + "/check-glimpse-fields/" + username);
+    public downloadProfileFieldsAsJson(username, type) : Observable<HttpResponse<string>> {
+        let headers = new HttpHeaders();
+        headers = headers.append('Accept', 'application/json; charset=utf-8');
+        return this.http.get(this.userProfileUrl + "/download-fields-json/" + username+ "/" + type,
+        {
+            headers: headers,
+            observe: 'response',
+            responseType: 'text'
+        });
     }
 
 }

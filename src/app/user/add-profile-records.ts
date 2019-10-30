@@ -4,9 +4,9 @@ import { UserService } from '../service/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  templateUrl: './import-career.component.html'
+  templateUrl: './add-profile-records.html'
 })
-export class ImportCareerComponent {
+export class AddProfileRecordComponent {
 
   username: string;
   json: string = "";
@@ -29,20 +29,22 @@ export class ImportCareerComponent {
 
   }
 
-  importJSON(): void {
-    this.userService.importUserCareer(this.json, this.username)
+  addRecords(): void {
+    this.userService.addProfileRecords(this.json, this.username)
       .subscribe(data => {
         if (data.errorMsg) {
           this.openSnackBar(data.errorMsg, "Error! ");
         }
         else if (data.msg) {
           this.router.navigate(['users', {msg : data.msg}]);
+          //this.router.navigate(['userCard', [{msg : data.msg}, {username: this.username}]]);
+          //this.router.navigate(['userCard',  { queryParams: {msg: data.msg, username: this.username}}]);
         }
       });
   };
 
-  navidateToCard(username) {
-    this.router.navigate(['userCard', {username: username}]);
+  navidateToCard() {
+    this.router.navigate(['userCard', {username: this.username}]);
   }
   
 }

@@ -8,7 +8,7 @@
 		<button mat-button *ngIf="!authService.isUserLoggedIn()" routerLink="/login">Login</button>
 		<button mat-button *ngIf="!authService.isUserLoggedIn()" routerLink="/addUser">SignUp</button>	
 		<button mat-button *ngIf="authService.isUserLoggedIn()" routerLink="/users">Home</button>	
-		<button mat-button *ngIf="authService.isUserLoggedIn()" routerLink="/userCard">Profile</button>	
+		<button mat-button *ngIf="authService.isUserLoggedIn()" routerLink="/userCard">Profiles</button>	
 		<button mat-button *ngIf="authService.isUserLoggedIn()" routerLink="/logout">Logout</button>
 	</mat-toolbar-row>
 </mat-toolbar>
@@ -18,7 +18,7 @@
 </main>
 <br>
 <footer>
-	<h6 align="center">Copyright © ProfileWise Inc.</h6>
+	<h6 style="color: indigo" align="center">Copyright © ProfileWise Inc.</h6>
 </footer>
 </div>
 <br>

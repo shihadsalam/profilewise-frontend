@@ -1,0 +1,56 @@
+
+<form [formGroup]="addProfileFieldsForm" autocomplete="off" novalidate
+fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+<br>
+<h6>
+	Configure Profile Fields for <strong>{{username}}</strong> [ *** Maximum of
+	10 fields *** ]
+</h6>
+<br>
+<mat-card> <mat-card-content>
+<form>
+	<div [formGroup]="addProfileFieldsForm">
+		<mat-form-field> <input matInput
+			placeholder="Field Set Type" formControlName="type" name="type"
+			id="type"> </mat-form-field>
+	</div>
+	<div style="margin-right: 20px;" align="right"><a [routerLink]="['/viewProfileFields', username]"><strong>View Exisitng Field Sets</strong></a></div>
+	<br>
+	<table class="table mat-table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th style="width: 10%">Action</th>
+				<th>Field</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let record of profileFieldList; let i = index;">
+				<td>
+					<button mat-icon-button color="primary" (click)="addRow()">
+						<mat-icon aria-label="Add">add</mat-icon>
+					</button>
+					<button mat-icon-button color="warn" (click)="deleteRow(i)">
+						<mat-icon aria-label="Delete">delete</mat-icon>
+					</button>
+				</td>
+				<td>
+					<div [formGroup]="addProfileFieldsForm">
+						<mat-form-field> <input matInput
+							placeholder="Custom Field" [formControlName]="i"
+							[name]="profileFieldList[i]" [id]="profileFieldList[i]"
+							[value]="profileFieldList[i]"> </mat-form-field>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+</mat-card-content> <mat-card-actions>
+<button mat-raised-button color="primary" (click)="submit()">
+	Submit</button>
+&nbsp;
+<button mat-raised-button color="accent"
+	(click)="navidateToCard(username)">Back</button>
+</mat-card-actions> </mat-card>
+</form>
+<br>

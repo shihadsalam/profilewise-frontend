@@ -3,16 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './login/logout.component';
-import { UserComponent } from './user/user.component';
-import { UserCardComponent } from './user/user-card.component';
-import { AddUserComponent } from './user/add-user.component';
-import { AddUserCareerComponent } from './user/add-user-career.component';
-import { UploadUserCareerComponent } from './user/upload-user-career.component';
-import { ImportCareerComponent } from './user/import-career.component';
-import { EditUserComponent } from './user/edit-user.component';
-import { MultiEditUserComponent } from './user/multi-edit-user.component';
-import { DefineGlimpseComponent } from './user/define-glimpse.component';
-import { AddGlimpseComponent } from './user/add-glimpse.component';
+import { UserComponent } from './user/user-home';
+import { UserCardComponent } from './user/user-card';
+import { AddUserComponent } from './user/add-user';
+import { UploadUserProfileComponent } from './user/upload-user-profile';
+import { AddProfileRecordComponent } from './user/add-profile-records';
+import { EditUserComponent } from './user/edit-user';
+import { AddProfileFieldsComponent } from './user/add-profile-fields';
+import { ViewProfileFieldsComponent } from './user/view-profile-fields';
 
 const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -21,13 +19,11 @@ const routes: Routes = [
     { path: 'users', component: UserComponent },
     { path: 'userCard', component: UserCardComponent },
     { path: 'addUser', component: AddUserComponent },
-    { path: 'addUserCareer/:username', component: AddUserCareerComponent },
-    { path: 'uploadUserCareer/:username', component: UploadUserCareerComponent },
-    { path: 'importUserCareer/:username', component: ImportCareerComponent }, 
+    { path: 'uploadProfileRecords/:username', component: UploadUserProfileComponent },
+    { path: 'addProfileRecords/:username', component: AddProfileRecordComponent }, 
     { path: 'editUser/:username', component: EditUserComponent },
-    { path: 'multiEditUser/:username', component: MultiEditUserComponent },
-    { path: 'defineGlimpse/:username', component: DefineGlimpseComponent },
-    { path: 'addGlimpse/:username', component: AddGlimpseComponent }
+    { path: 'addProfileFields/:username', component: AddProfileFieldsComponent },
+    { path: 'viewProfileFields/:username', component: ViewProfileFieldsComponent }
 ];
 
 @NgModule({

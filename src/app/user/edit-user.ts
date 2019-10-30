@@ -1,24 +1,23 @@
 import { Component } from "@angular/core";
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserCareer} from './user-career';
 
 import { User } from './user';
 import { UserService } from '../service/user.service';
 
 @Component({
-  templateUrl: './multi-edit-user.component.html'
+  templateUrl: './edit-user.html'
 })
-export class MultiEditUserComponent {
+export class EditUserComponent {
 
   user: User;
   username: String = "";
   userNames: String[];
   msg: String = "";
-  countries: string[] = ["India", "England", "Australia", "South Africa", "New Zealand"];
+  genders: string[] = ["Male", "Female"];
+  roles: string[] = ["Admin", "HOD", "Student", "Manager", "Employee"];
   public editUserForm: FormGroup;
-  public careerForm: FormGroup;
-  userCareer: UserCareer = new UserCareer();
+  public contactForm: FormGroup;
 
   constructor(private router: Router, private route: ActivatedRoute, private userService: UserService) {
     route.params.subscribe(params => {
@@ -26,9 +25,6 @@ export class MultiEditUserComponent {
       this.userService.getUserByUsername(this.username).
         subscribe(data => {
           this.user = data;
-          if (this.user.userCareer) {
-            this.userCareer =  this.user.userCareer;
-          }
         });
       });
   }
@@ -42,22 +38,19 @@ export class MultiEditUserComponent {
     this.editUserForm = new FormGroup({
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
+      gender: new FormControl('', [Validators.required]),
       dob: new FormControl('', [Validators.required]),
       username: new FormControl({ value: '', disabled: true }),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      country: new FormControl('', [Validators.required]),
-      isAdmin: new FormControl('', [])
+      userRole: new FormControl('', [Validators.required]),
+      isSupervisor: new FormControl('', [])
     });
 
-    this.careerForm = new FormGroup({
-      matches: new FormControl('', [Validators.required]),
-      runs: new FormControl('', [Validators.required]),
-      battingAvg: new FormControl('', [Validators.required]),
-      highScore: new FormControl('', [Validators.required]),
-      wickets: new FormControl('', [Validators.required]),
-      bowlingAvg: new FormControl('', [Validators.required]),
-      bestBowling: new FormControl('', [Validators.required]),
-      catches: new FormControl('', [Validators.required]),
+    this.contactForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      phoneNumber: new FormControl('', [Validators.required]),
+      addressLine1: new FormControl('', [Validators.required]),
+      addressLine2: new FormControl('', [Validators.required]),
+      addressLine3: new FormControl('', [Validators.required])
     });
   }
 
@@ -65,22 +58,21 @@ export class MultiEditUserComponent {
     return this.editUserForm.controls[controlName].hasError(errorName);
   }
 
-  public hasCareerError = (controlName: string, errorName: string) =>{
-    return this.careerForm.controls[controlName].hasError(errorName);
+  public hasContacError = (controlName: string, errorName: string) =>{
+    return this.contactForm.controls[controlName].hasError(errorName);
   }
 
-  updateUser(user, userCareer): void {
-    if(this.user.userCareer == null){
-      this.user.userCareer = userCareer;
-    }
+  updateUser(user): void {
     this.userService.editUser(user)
       .subscribe(data => {
         this.msg = "User " +this.user.firstName+ " edited successfully.";
-        this.router.navigate(['users', {msg: this.msg}]);
+        this.router.navigate(['userCard', {username: user.username, msg: this.msg}]);
+        //this.router.navigate(['users', {msg: this.msg}]);
       });
   };
 
-  navidateToCard(username) {
+  navidateBack(username) {
     this.router.navigate(['userCard', {username: username}]);
+    //this.router.navigate(['users']);
   }
 }

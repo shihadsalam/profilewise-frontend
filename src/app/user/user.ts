@@ -1,16 +1,18 @@
-import { UserCareer } from './user-career';
+import { UserContact } from './user-contact';
 
 export class User {
     constructor(
       public id: number = 0,
-      public userCareer: UserCareer = new UserCareer(),
+      public userContact: UserContact = new UserContact(),
+      public supervisor: User = null,
       public firstName: string = "",
       public lastName: string = "",
+      public gender: string = "",
       public dob: string = "",
       public username: string = "",
-      public email: string = "",
       public password: string = "",
-      public country: string = "",
-      public isAdmin: boolean = false
+      public role: string = "",
+      public isSupervisor: boolean = false,
+      public isSupervisorAssigned: boolean = false
     ) {}
   }

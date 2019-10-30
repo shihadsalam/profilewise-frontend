@@ -11,20 +11,19 @@ import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatBu
   MatSelectModule, MatCheckboxModule } from "@angular/material";
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
-import { UserComponent } from './user/user.component';
-import { AddUserCareerComponent } from './user/add-user-career.component';
-import { DefineGlimpseComponent } from './user/define-glimpse.component';
-import { AddGlimpseComponent } from './user/add-glimpse.component';
-import { UploadUserCareerComponent } from './user/upload-user-career.component';
-import { ImportCareerComponent } from './user/import-career.component';
-import { UserCardComponent } from './user/user-card.component';
-import { ProfileDialogComponent } from './user/profile-dialog.component';
+import { UserComponent } from './user/user-home';
+import { AddProfileFieldsComponent } from './user/add-profile-fields';
+import { ViewProfileFieldsComponent } from './user/view-profile-fields';
+import { UploadUserProfileComponent } from './user/upload-user-profile';
+import { AddProfileRecordComponent } from './user/add-profile-records';
+import { UserCardComponent } from './user/user-card';
+import { EmptyProfileDialogComponent } from './user/empty-profile-dialog';
+import { ViewProfileRecordsComponent } from './user/view-profile-records';
 import { UserService } from './service/user.service';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './login/logout.component';
-import { AddUserComponent } from './user/add-user.component';
-import { EditUserComponent } from './user/edit-user.component';
-import { MultiEditUserComponent } from './user/multi-edit-user.component';
+import { AddUserComponent } from './user/add-user';
+import { EditUserComponent } from './user/edit-user';
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AuthService } from "./service/auth.service";
@@ -32,6 +31,7 @@ import { Interceptor } from "./service/interceptor";
 import { TokenStorage } from "./service/token.storage";
 import { FileSelectDirective } from "ng2-file-upload";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DeleteDialogComponent } from './user/delete-dialog';
 
 export const MY_FORMATS = {
   parse: {
@@ -53,14 +53,14 @@ export const MY_FORMATS = {
     LoginComponent,
     LogoutComponent,
     AddUserComponent,
-    DefineGlimpseComponent,
-    AddGlimpseComponent,
-    AddUserCareerComponent,
-    ProfileDialogComponent,
-    UploadUserCareerComponent,
-    ImportCareerComponent,
+    AddProfileFieldsComponent,
+    ViewProfileFieldsComponent,
+    ViewProfileRecordsComponent,
+    EmptyProfileDialogComponent,
+    DeleteDialogComponent,
+    UploadUserProfileComponent,
+    AddProfileRecordComponent,
     EditUserComponent,
-    MultiEditUserComponent,
     FileSelectDirective
   ],
   imports: [
@@ -99,7 +99,7 @@ export const MY_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ProfileDialogComponent]
+  entryComponents: [ViewProfileRecordsComponent, EmptyProfileDialogComponent, DeleteDialogComponent]
 })
 export class AppModule { }
 

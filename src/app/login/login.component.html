@@ -13,7 +13,6 @@
 				 <mat-form-field>
 				  <input matInput placeholder="Username" [(ngModel)]="loginUser.username" formControlName="username" name="username" id="username">
 				  <mat-error *ngIf="hasError('username', 'required')">Username is required</mat-error>
-				  <mat-error *ngIf="hasError('username', 'maxlength')">You have more than 10 characters</mat-error>  
 				</mat-form-field>
 				</div>
 				</td>

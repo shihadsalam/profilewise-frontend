@@ -1,0 +1,40 @@
+
+<form [formGroup]="viewProfileFieldsForm" autocomplete="off" novalidate
+fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+<br>
+<h6>
+	Profile Fields for <strong>{{username}}</strong>
+</h6>
+<br>
+<mat-card> <mat-card-content>
+<form>
+	<div [formGroup]="viewProfileFieldsForm">
+			<mat-form-field> <mat-label>Field Set Type</mat-label>
+			<br>
+			<mat-select placeholder="Field Set Type" formControlName="type"
+				name="type" id="type">
+			<mat-option *ngFor="let profileFieldType of profileFieldTypes" (click)="populate(profileFieldType)" [value]="profileFieldType">{{profileFieldType}}</mat-option>
+		</mat-select></mat-form-field>
+	</div>
+	<br>
+	<br>
+	<table style="width: 400px" class="table mat-table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th>Fields</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let record of profileFieldValues; let i = index;">
+				<td>{{profileFieldValues[i]}}</td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+</mat-card-content> <mat-card-actions>
+<button mat-raised-button color="primary" (click)="download()">Download</button>
+&nbsp;
+<button mat-raised-button color="accent"(click)="navidateToCard(username)">Back</button>
+</mat-card-actions> </mat-card>
+</form>
+<br>
