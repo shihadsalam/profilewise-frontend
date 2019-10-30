@@ -17,7 +17,7 @@ export class UserService {
     constructor(private http: HttpClient) { }
 
     private userUrl = 'http://localhost:8088/users';
-    private userProfileUrl = 'http://localhost:8088/users';
+    private userProfileUrl = 'http://localhost:8088/user-profile';
     //private userUrl = '/users';
 
     public getUsers() {
