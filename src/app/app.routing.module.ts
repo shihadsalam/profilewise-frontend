@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './login/logout.component';
+import { LoginComponent } from './login/login';
+import { LogoutComponent } from './login/logout'
 import { UserComponent } from './user/user-home';
 import { UserCardComponent } from './user/user-card';
 import { AddUserComponent } from './user/add-user';

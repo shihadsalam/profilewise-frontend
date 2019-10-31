@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { TokenStorage } from '../service/token.storage';
 
 @Component({
-    templateUrl: './logout.component.html'
+    templateUrl: './logout.html'
 })
 export class LogoutComponent implements OnInit{
     ngOnInit(): void {

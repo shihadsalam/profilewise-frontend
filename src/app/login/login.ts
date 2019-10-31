@@ -8,7 +8,7 @@ import { LoginUser } from './loginUser';
 
 @Component({
     selector: 'app-login',
-    templateUrl: './login.component.html'
+    templateUrl: './login.html'
 })
 export class LoginComponent implements OnInit{
 
@@ -46,17 +46,28 @@ export class LoginComponent implements OnInit{
       }
 
     login(): void {
-        this.authService.attemptAuth(this.loginUser.username, this.loginUser.password, this.generateTokenUrl).subscribe(
-            data => {
-                if (data.errorMsg) {
-                    this.openSnackBar(data.errorMsg, "Error! ");
+        if (!this.loginUser.username && !this.loginUser.password) {
+            this.openSnackBar("Username & Password requried", "Error! ");
+        } 
+        else if (!this.loginUser.username) {
+            this.openSnackBar("Username requried", "Error! ");
+        }
+        else if(!this.loginUser.password) {
+            this.openSnackBar("Password requried", "Error! ");
+        }
+        else {
+            this.authService.attemptAuth(this.loginUser.username, this.loginUser.password, this.generateTokenUrl).subscribe(
+                data => {
+                    if (data.errorMsg) {
+                        this.openSnackBar(data.errorMsg, "Error! ");
+                    }
+                    else {
+                        this.token.saveToken(data.token, this.loginUser.username);
+                        this.router.navigate(['users']);
+                    }
                 }
-                else {
-                    this.token.saveToken(data.token, this.loginUser.username);
-                    this.router.navigate(['users']);
-                }
-            }
-        );
+            );
+        }
     }
 
 }

@@ -68,8 +68,12 @@ export class UserService {
         return this.http.get<Map<String, Map<string, object>>>(this.userProfileUrl + "/get-profile-records/" + username);
     }
 
-    public addProfileRecords(jsonData, username) {
-        return this.http.post<Message>(this.userProfileUrl + "/add-profile-records/" + username, jsonData);
+    public addProfileRecords(profileRecord) {
+        return this.http.post<Message>(this.userProfileUrl + "/add-profile-records", profileRecord);
+    }
+
+    public getProfileFieldsAsJson(username, type) {
+        return this.http.get<string>(this.userProfileUrl + "/get-fields-json/" + username+ "/" + type);
     }
 
     public downloadProfileFieldsAsJson(username, type) : Observable<HttpResponse<string>> {

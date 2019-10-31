@@ -1,11 +1,40 @@
-<br>
-<ngb-alert *ngIf="message && message.errorMsg && !closed" [type]="'danger'" (close)="closed=true">{{message.errorMsg}}</ngb-alert>
-<br>
+<!--<ngb-alert *ngIf="message && message.errorMsg && !closed" [type]="'danger'" (close)="closed=true">{{message.errorMsg}}</ngb-alert>-->
 <div class="form-group">
-		<h6>Add Profile Records for <strong>{{username}}</strong></h6>
-		<textarea class="form-control" rows="10" name="json" [(ngModel)]="json"></textarea>
+		<div *ngIf="!fieldsNotAvailable"><h6>Add Profile Records for <strong>{{username}}</strong></h6></div>
+		<br>
+		<div *ngIf="fieldsNotAvailable">Profile fields not yet created for <strong>{{username}}. </strong>
+			<a [routerLink]="['/addProfileFields', username]">Configure Here</a>
+		</div>
+		<mat-form-field>
+			<mat-select [(ngModel)]="fieldType" placeholder="Field Set Type">
+			  <mat-option *ngFor="let profileFieldType of profileFieldTypes" (click)="clicked(profileFieldType)" [value]="profileFieldType">{{ profileFieldType }}</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<div *ngIf="showDownloadLink">
+			<button style="height: 33px" mat-raised-button color="primary" (click)="downloadFieldSet()">Download Field Set as JSON</button>
+		</div>
+		<br>
+		<textarea placeholder="JSON Data" class="form-control" rows="10" name="json" [value]="[json]" [(ngModel)]="json"></textarea>
+		<!--
+		<mat-form-field>
+			<textarea matInput rows="10" name="json" [(ngModel)]="json"></textarea>
+		</mat-form-field>
+		-->
 		<br>
 		<button mat-raised-button color="primary" (click)="addRecords()">Add Records</button>
 		<span>&nbsp;&nbsp;</span>
 		<button mat-raised-button color="accent" (click)="navidateToCard()">Back</button>	
 </div>
+
+<!--
+
+	<div class="form-group">
+	<mat-form-field> <mat-label>Field Set Type</mat-label>
+	<br>
+	<mat-select placeholder="Field Set Type" formControlName="type"
+		name="type" id="type">
+	<mat-option *ngFor="let profileFieldType of profileFieldTypes" (click)="populate(profileFieldType)" [value]="profileFieldType">{{profileFieldType}}</mat-option>
+</mat-select></mat-form-field>
+</div>
+
+-->

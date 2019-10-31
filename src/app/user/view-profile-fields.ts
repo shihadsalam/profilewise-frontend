@@ -35,11 +35,16 @@ export class ViewProfileFieldsComponent implements OnInit{
 
   download() {
     let val = this.viewProfileFieldsForm.value;
-    this.userService.downloadProfileFieldsAsJson(this.username, val.type)
-    .subscribe(response => {
-      const filename = this.username+"_"+val.type+".json";
-      this.saveFile(response.body, filename);
-    });
+    if(!val.type) {
+      this.openSnackBar("Please select Field Set Type", "Error! ");
+    }
+    else {
+      this.userService.downloadProfileFieldsAsJson(this.username, val.type)
+      .subscribe(response => {
+        const filename = this.username+"_"+val.type+".json";
+        this.saveFile(response.body, filename);
+      });
+    }
   }
 
   populate(fieldSet) {
