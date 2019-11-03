@@ -1,5 +1,15 @@
 <div style="color:maroon" class="close" (click)="close()">x</div>
-	<div><mat-icon style="font-size: 65px">art_track</mat-icon></div>
+<table>
+	<tr>
+		<td>
+				<mat-icon style="font-size: 65px">art_track</mat-icon>
+		</td>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<td>
+				<h5>Profile Data: {{username}}</h5>
+		</td>
+	</tr>
+</table>
 	<div *ngFor="let title of titles">	
 		<h6 style="color: indigo">{{title}}</h6>
 		<mat-table class="mat-elevation-z8" [dataSource]="[map[title]]">	

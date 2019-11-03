@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 import { AuthService } from './service/auth.service';
+import { Router } from '@angular/router';
+import { TokenStorage } from './service/token.storage';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +9,12 @@ import { AuthService } from './service/auth.service';
 })
 export class AppComponent {
 
-  constructor(private authService : AuthService){ 
+  username: string = "";
 
+  constructor(private authService: AuthService, private router: Router, private token : TokenStorage){ 
+    if(token) {
+      this.username = token.getCurrentUser();
+    }
   }
+
 }

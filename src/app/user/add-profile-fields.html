@@ -10,9 +10,25 @@ fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
 <mat-card> <mat-card-content>
 <form>
 	<div [formGroup]="addProfileFieldsForm">
-		<mat-form-field> <input matInput
-			placeholder="Field Set Type" formControlName="type" name="type"
-			id="type"> </mat-form-field>
+	<table>
+		<tr>
+			<td>
+			<mat-form-field> <input matInput disabled="disableTypeField" placeholder="Field Set Type" formControlName="type" 
+				name="type" id="type" [value]="type"> </mat-form-field>
+			</td>
+			<td>
+				&nbsp;&nbsp;&nbsp; OR &nbsp;&nbsp;&nbsp;
+				<mat-form-field>
+					<mat-select placeholder="Reuse another Field Set Type" formControlName="reuseType" 
+					name="reuseType" id="reuseType">
+					  <mat-option *ngFor="let existingProfileFieldType of existingProfileFieldTypes" 
+					  (click)="reuseTypeClicked(existingProfileFieldType)" [value]="existingProfileFieldType">
+					  {{ existingProfileFieldType }}</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</td>
+		</tr>
+	</table>
 	</div>
 	<div style="margin-right: 20px;" align="right"><a [routerLink]="['/viewProfileFields', username]"><strong>View/Download</strong></a></div>
 	<br>

@@ -3,6 +3,7 @@ import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
+import { ChartsModule } from 'ng2-charts';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { MomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule, 
@@ -32,6 +33,10 @@ import { TokenStorage } from "./service/token.storage";
 import { FileSelectDirective } from "ng2-file-upload";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DeleteDialogComponent } from './user/delete-dialog';
+import { DoughnutChartComponent } from './chart/doughnut-chart';
+import { RadarChartComponent } from './chart/radar-chart';
+import { PieChartComponent } from './chart/pie-chart';
+import { BarChartComponent } from './chart/bar-chart';
 
 export const MY_FORMATS = {
   parse: {
@@ -61,11 +66,16 @@ export const MY_FORMATS = {
     UploadUserProfileComponent,
     AddProfileRecordComponent,
     EditUserComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    BarChartComponent,
+    DoughnutChartComponent,
+    RadarChartComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule, 
     FormsModule,
+    ChartsModule,
     ReactiveFormsModule,
     NgbModule,
     MatToolbarModule, 

@@ -12,7 +12,12 @@ export class AddProfileFieldsComponent implements OnInit{
 
   fieldLen: number = 10;
   username: String = "";
+  type: string = "";
+  disableTypeField: boolean = false;
+  mapFields: Map<String, String[]>;
+  profileFieldValues: string[] = [];
   profileFieldList: string[] = [""];
+  existingProfileFieldTypes: String[] = [];
   profileFields: ProfileFields;
   public addProfileFieldsForm: FormGroup;
 
@@ -20,12 +25,19 @@ export class AddProfileFieldsComponent implements OnInit{
     private route: ActivatedRoute, private snackBar: MatSnackBar) { 
     route.params.subscribe(params => {
       this.username = params['username'];
+      this.userService.getProfileFieldsAsMap('ALL')
+      .subscribe(data => {
+          this.mapFields = data;
+          this.existingProfileFieldTypes = Object.keys(this.mapFields);
+      }); 
     });
   }   
 
   ngOnInit() {
     this.addProfileFieldsForm = new FormGroup({username: new FormControl('', [])});
     this.addProfileFieldsForm.addControl("type", new FormControl('', Validators.required));
+    this.addProfileFieldsForm.addControl("reuseType", new FormControl(''));
+    
     for (let index = 0; index < this.fieldLen; index++) {
       this.addProfileFieldsForm.addControl(index.toString(), new FormControl('', Validators.required));
     }
@@ -57,8 +69,12 @@ export class AddProfileFieldsComponent implements OnInit{
     let val = this.addProfileFieldsForm.value;
     this.profileFields = new ProfileFields();
     this.profileFields.username = this.username;
-    if(val.type) {
-      this.profileFields.type = val.type;
+    if (!val.type && !val.reuseType) {
+      this.openSnackBar("Field Set Type is required", "Error! ");
+    }
+    let type = val.reuseType ? val.reuseType : val.type;
+    if(type) {
+      this.profileFields.type = type;
       this.profileFields.field1 =   val[0] ? val[0] : (this.profileFieldList[0] ? this.profileFieldList[0] : ""),
       this.profileFields.field2 =   val[1] ? val[1] : (this.profileFieldList[1] ? this.profileFieldList[1] : ""),
       this.profileFields.field3 =   val[2] ? val[2] : (this.profileFieldList[2] ? this.profileFieldList[2] : ""),
@@ -80,9 +96,19 @@ export class AddProfileFieldsComponent implements OnInit{
      });
     }
     else {
-      this.openSnackBar("Field Set Type is required", "Error! ");
+      
     }
     
+  }
+
+  reuseTypeClicked(reuseType) {
+    this.type = reuseType;
+    this.disableTypeField = true;
+    this.profileFieldValues = this.mapFields[reuseType];
+    this.profileFieldList = [];
+    this.profileFieldValues.forEach(val => {
+      this.profileFieldList.push(val);
+    });
   }
 
   openSnackBar(message: string, action: string) {

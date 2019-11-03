@@ -8,7 +8,16 @@
 		<button mat-button *ngIf="!authService.isUserLoggedIn()" routerLink="/login">Login</button>
 		<button mat-button *ngIf="!authService.isUserLoggedIn()" routerLink="/addUser">SignUp</button>	
 		<button mat-button *ngIf="authService.isUserLoggedIn()" routerLink="/users">Home</button>	
-		<button mat-button *ngIf="authService.isUserLoggedIn()" routerLink="/userCard">Profiles</button>	
+		<button mat-button *ngIf="authService.isUserLoggedIn()" routerLink="/userCard">Profiles</button>		
+		
+		<button *ngIf="authService.isUserLoggedIn()" mat-button [matMenuTriggerFor]="menu">Charts</button>
+		<mat-menu #menu="matMenu" overlapTrigger="false">
+			   <button mat-menu-item [routerLink]="['/bar-chart', username]">Bar Chart</button>
+			   <button mat-menu-item [routerLink]="['/doughnut-chart', username]">Doughnut Chart</button>
+			   <button mat-menu-item [routerLink]="['/radar-chart', username]">Radar Chart</button>
+			   <button mat-menu-item [routerLink]="['/pie-chart', username]">Pie Chart</button>
+		 </mat-menu>
+		
 		<button mat-button *ngIf="authService.isUserLoggedIn()" routerLink="/logout">Logout</button>
 	</mat-toolbar-row>
 </mat-toolbar>

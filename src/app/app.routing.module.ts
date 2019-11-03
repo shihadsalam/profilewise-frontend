@@ -11,6 +11,10 @@ import { AddProfileRecordComponent } from './user/add-profile-records';
 import { EditUserComponent } from './user/edit-user';
 import { AddProfileFieldsComponent } from './user/add-profile-fields';
 import { ViewProfileFieldsComponent } from './user/view-profile-fields';
+import { BarChartComponent } from './chart/bar-chart';
+import { DoughnutChartComponent } from './chart/doughnut-chart';
+import { RadarChartComponent } from './chart/radar-chart';
+import { PieChartComponent } from './chart/pie-chart';
 
 const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -23,7 +27,12 @@ const routes: Routes = [
     { path: 'addProfileRecords/:username', component: AddProfileRecordComponent }, 
     { path: 'editUser/:username', component: EditUserComponent },
     { path: 'addProfileFields/:username', component: AddProfileFieldsComponent },
-    { path: 'viewProfileFields/:username', component: ViewProfileFieldsComponent }
+    { path: 'viewProfileFields/:username', component: ViewProfileFieldsComponent },
+      //Chart Routes
+    {path: 'bar-chart/:username', component: BarChartComponent},
+    {path: 'doughnut-chart/:username', component: DoughnutChartComponent},
+    {path: 'radar-chart/:username', component: RadarChartComponent},
+    {path: 'pie-chart/:username', component: PieChartComponent}
 ];
 
 @NgModule({

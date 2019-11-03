@@ -1,0 +1,39 @@
+<br>
+<h6>Radar Chart View</h6>
+<br>
+<div>
+	<table>
+		<tr>
+			<td>
+					<mat-form-field>
+							<mat-select placeholder="Reportee">
+							  <mat-option *ngFor="let reportee of reportees" (click)="populateFieldSet(reportee)" [value]="reportee">{{ reportee }}</mat-option>
+							</mat-select>
+					</mat-form-field>
+			</td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<td>
+					<mat-form-field>
+							<mat-select placeholder="Field Set">
+							  <mat-option *ngFor="let profileFieldType of profileFieldTypes" (click)="fieldSetSelected(profileFieldType)" [value]="profileFieldType">{{ profileFieldType }}</mat-option>
+							</mat-select>
+					</mat-form-field>
+			</td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<td>
+				<button mat-raised-button color="primary" (click)="populateChart()">Populate Chart</button>
+			</td>
+		</tr>
+	</table>
+<br>
+<div>
+	<div *ngIf="displayChart" style="display: block">
+			<canvas baseChart id="radarChart"
+			[datasets]="radarChartData"
+			[labels]="radarChartLabels"
+			[chartType]="radarChartType"></canvas>
+	<br>
+	<button mat-raised-button color="primary" (click)="exportAsPDF()">Export PDF</button>
+	</div>
+  </div>
+  <br>

@@ -37,10 +37,9 @@ export class UserComponent {
   page = 1;
   pageSize = 4;
   users: User[];
-  user: User;
   msg: string;
-  deleteMsg: string;
-  deletedUser: string;
+  action: string;
+  deletedUser: User;
   errorMsg: string;
   currentUser: string = "";
   isCurrentUserSupervisor: boolean = false;
@@ -53,27 +52,27 @@ export class UserComponent {
       route.params.subscribe(params => {
       this.msg = params['msg'];
       this.errorMsg = params['errorMsg'];
-      this.deletedUser = params['deletedUser'];
+      this.action = params['action'];
+      if(this.action == 'deleted') {
+        this.userDeleted();
+      }
       if(this.msg) {
         this.openSnackBar(this.msg, "Success! ");
       } 
       else if (this.errorMsg) {
         this.openSnackBar(this.errorMsg, "Error! ");
       }
-      else if(this.deletedUser) {
-        this.getUser(this.deletedUser);
-        this.userDeleted();
-      }
     });
 
-    this.userService.getUsers()
-    .subscribe(data => {
-      this.users = data;
-      this.dataSource = new MatTableDataSource(this.users);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      this.isSupervisor();
-      //this.addUserIcons();
+    //this.userService.getUsers()
+    this.userService.getAuthorizedUsers()
+      .subscribe(data => {
+        this.users = data;
+        this.dataSource = new MatTableDataSource(this.users);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.isSupervisor();
+        //this.addUserIcons();
     });
 
     //const headers = [{name: 'Accept', value: 'application/json'}];
@@ -103,20 +102,19 @@ export class UserComponent {
   }
 
   deleteUser(user: User): void {
+    this.deletedUser = user;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = false;
     dialogConfig.minWidth = 350;
-    dialogConfig.height = '150px';
+    dialogConfig.height = '170px';
     dialogConfig.data = {username : user.username};
     this.dialog.open(DeleteDialogComponent, dialogConfig);
   }
 
   userDeleted(): void {
-    this.users = this.users.filter(u => u !== this.user);
+    this.users = this.users.filter(u => u !== this.deletedUser);
     this.dataSource.data = this.users;
-    this.deleteMsg = "User " +this.user.firstName+ " deleted successfully";
-    this.openSnackBar(this.deleteMsg, "Success! ");
   }
 
   assignAsReportee(user: User): void {
@@ -151,14 +149,6 @@ export class UserComponent {
         }
       }
     );
-  }
-
-  getUser(username) {
-    this.users.forEach(eachUser => {
-      if (eachUser.username == username) {
-        this.user = eachUser;
-      }
-    });
   }
 
   isSupervisor(): void {

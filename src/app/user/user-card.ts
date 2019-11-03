@@ -14,10 +14,13 @@ import { MatSort, MatTableDataSource} from '@angular/material';
 export class UserCardComponent {
     
     users: User[] = [];
+    usersDropdown: User[] = [];
+    user: User;
     page = 1;
     pageSize = 1;
     msg: string;
     username: String;
+    showUserDropdown: boolean = false;
     @ViewChild(MatSort, {static: false}) sort: MatSort;
     displayedColumns1 = ['firstName', 'lastName', 'gender', 'dob', 'username', 'userRole', 'usertype'];
     displayedColumns2 = ['emailCard', 'phoneNumber', 'address'];
@@ -33,15 +36,19 @@ export class UserCardComponent {
                 if (this.username) {
                     this.userService.getUserByUsername(this.username).
                     subscribe(data => {
+                        this.user = data;
                         this.users = [];
                         this.users.push(data);
                         this.dataSource.data = this.users;
+                        this.usersDropdown = this.users;
                     });
                 }
                 else {
-                    this.userService.getUsers().subscribe(data => {
+                    this.userService.getAuthorizedUsers().subscribe(data => {
                         this.users = data;
                         this.dataSource.data = this.users;
+                        this.usersDropdown = this.users;
+                        this.showUserDropdown = true;
                     });
                 }
 
@@ -49,6 +56,12 @@ export class UserCardComponent {
                     this.openSnackBar(this.msg, "Success! ");
                 }
               });
+    }
+
+    userSelected(user) {
+        this.users = [];
+        this.users.push(user);
+        this.dataSource.data = this.users;
     }
 
     displayProfile(user) {

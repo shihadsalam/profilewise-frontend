@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class DeleteDialogComponent{
 
   username: String = "";
+  actionMsg: String;
 
   constructor(private router: Router, private dialogRef: MatDialogRef<DeleteDialogComponent>, 
     @Inject(MAT_DIALOG_DATA) data, private userService: UserService) {
@@ -19,7 +20,11 @@ export class DeleteDialogComponent{
     this.userService.deleteUser(this.username)
     .subscribe(data => {
       this.close();
-      this.router.navigate(['users', {deletedUser: this.username}]);
+      if(data.msg) {
+        this.actionMsg = 'deleted';
+      }
+      this.router.navigate(['users', {msg: data.msg, errorMsg : data.errorMsg, 
+        action : this.actionMsg}]);
     });
   }
 

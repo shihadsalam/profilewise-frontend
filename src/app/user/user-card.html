@@ -1,3 +1,10 @@
+<div *ngIf="showUserDropdown">
+	<mat-form-field>
+			<mat-select placeholder="User">
+			<mat-option *ngFor="let usr of usersDropdown" (click)="userSelected(usr)" [(ngModel)]="usr" ngDefaultControl name="usr" [value]="usr">{{ usr.username }}</mat-option>
+			</mat-select>
+	</mat-form-field>
+</div>
 <br>
 <table class="table">
  	<tbody>
