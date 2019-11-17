@@ -28,6 +28,7 @@
               "src/bootstrap-4/css/bootstrap.css",
               "src/bootstrap-4/css/bootstrap.min.css",
               "src/app/styles-app-loading.scss",
+              "src/app/theme.scss",
               "src/styles.css"
             ],
             "scripts": [
