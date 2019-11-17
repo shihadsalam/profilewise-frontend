@@ -24,7 +24,16 @@ export class BarChartComponent implements OnInit{
 
   public barChartOptions = {
     scaleShowVerticalLines: false,
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true
+          }
+        }
+      ]
+    }
   };
   
   //public barChartColors: Array<any> = [
