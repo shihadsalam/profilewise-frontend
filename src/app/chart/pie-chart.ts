@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../service/user.service';
+import { User } from '../user/user';
 
 declare var jsPDF: any;
 @Component({
@@ -9,7 +10,6 @@ declare var jsPDF: any;
 })
 export class PieChartComponent implements OnInit{
 
-  currentUser: String = "";
   reportee: string = "";
   recordSet: string = "";
   reportees: String[] = [];
@@ -18,6 +18,7 @@ export class PieChartComponent implements OnInit{
   pieChartLabels: String[] = [];
   pieChartData: Number[] = [];
   pieChartType: string = "pie";
+  currentUser: User;
 
   //public pieChartLabels = ['10th Board Total Marks', 'Title2', 'Title3'];
   //public pieChartData = [550, 375, 400];
@@ -25,15 +26,20 @@ export class PieChartComponent implements OnInit{
 
   constructor(private userService: UserService, private router: Router, 
     private route: ActivatedRoute, private snackBar: MatSnackBar) { 
-      route.params.subscribe(params => {
-        this.currentUser = params['username'];
-        this.userService.getReportees(this.currentUser)
-          .subscribe(data => {
-            data.forEach(each => {
-                this.reportees.push(each.username);
+      this.currentUser = userService.getCurrentUser();
+      if(this.currentUser.isSupervisor) {
+        route.params.subscribe(params => {
+          this.userService.getReportees()
+            .subscribe(data => {
+              data.forEach(each => {
+                  this.reportees.push(each.username);
+              });
             });
-          });
-      });
+        });
+      }
+      else {
+        this.populateRecordSet(this.currentUser.username);
+      }
   }
 
   populateRecordSet(reportee) {

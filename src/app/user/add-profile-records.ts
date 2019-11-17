@@ -23,9 +23,11 @@ export class AddProfileRecordComponent {
       this.username = params['username'];
       this.userService.getProfileFieldsAsMap(this.username)
         .subscribe(data => {
-            this.profileFieldTypes = Object.keys(data);
-            if(!this.profileFieldTypes.length) {
-                this.fieldsNotAvailable = true;
+            if(data) {
+              this.profileFieldTypes = Object.keys(data);
+            }
+            else {
+              this.fieldsNotAvailable = true;
             }
         }); 
     });

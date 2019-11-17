@@ -1,15 +1,27 @@
 <!--<ngb-alert *ngIf="message && message.errorMsg && !closed" [type]="'danger'" (close)="closed=true">{{message.errorMsg}}</ngb-alert>-->
 <div class="form-group">
-		<div *ngIf="!fieldsNotAvailable"><h6>Add Profile Records for <strong>{{username}}</strong></h6></div>
+		<table>
+				<tr>
+					<td>
+						<mat-icon style="font-size: 40px">library_books</mat-icon>
+					</td>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<td *ngIf="!fieldsNotAvailable">
+						<h6>Add Profile Records for <strong>{{username}}</strong></h6>
+					</td>
+					<td *ngIf="fieldsNotAvailable">
+						<h6>Profile fields not created for <strong>{{username}}. </strong>
+						<a [routerLink]="['/addProfileFields', username]">Configure Here</a></h6>
+					</td>
+				</tr>
+		</table>
 		<br>
-		<div *ngIf="fieldsNotAvailable">Profile fields not yet created for <strong>{{username}}. </strong>
-			<a [routerLink]="['/addProfileFields', username]">Configure Here</a>
-		</div>
 		<mat-form-field>
 			<mat-select [(ngModel)]="fieldType" placeholder="Field Set Type">
 			  <mat-option *ngFor="let profileFieldType of profileFieldTypes" (click)="clicked(profileFieldType)" [value]="profileFieldType">{{ profileFieldType }}</mat-option>
 			</mat-select>
 		</mat-form-field>
+
 		<div *ngIf="showDownloadLink">
 			<button style="height: 33px" mat-raised-button color="primary" (click)="downloadFieldSet()">Download Field Set as JSON</button>
 		</div>

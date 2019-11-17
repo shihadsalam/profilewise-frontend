@@ -1,12 +1,19 @@
 
 <form [formGroup]="addProfileFieldsForm" autocomplete="off" novalidate
 fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
-<br>
-<h6>
-	Configure Profile Fields for <strong>{{username}}</strong> [ *** Maximum of
-	10 fields *** ]
-</h6>
-<br>
+<table>
+		<tr>
+			<td>
+					<mat-icon style="font-size: 40px">playlist_add</mat-icon>
+			</td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<td>
+					<h6>
+						Configure Profile Fields for <strong>{{username}}</strong> 
+					</h6>
+			</td>
+		</tr>
+	</table>
 <mat-card> <mat-card-content>
 <form>
 	<div [formGroup]="addProfileFieldsForm">

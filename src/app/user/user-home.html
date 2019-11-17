@@ -1,10 +1,30 @@
 <br/>
-<div style="margin-right: 20px;" align="right">Logged-In User: <strong style="color: indigo">{{currentUser}}</strong></div>
-<div class="example-header">	
-	<mat-form-field>
-		  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-		</mat-form-field>
-	  </div>
+<div style="margin-right: 20px;" align="right">
+		<table>
+				<tr>
+					<td>
+						<mat-icon color="accent" style="font-size: 25px">perm_identity</mat-icon>
+					</td>
+					<td>
+							<strong style="color: indigo">{{currentUser.username}}</strong>
+					</td>
+				</tr>
+			</table>
+</div>
+<div class="example-header">
+	<table>
+		<tr>
+			<td>
+				<mat-icon style="font-size: 20px">search</mat-icon>
+			</td>
+			<td>
+				<mat-form-field>
+					<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+				</mat-form-field>
+			</td>
+		</tr>
+	</table>
+	</div>
 	  <div class="example-container mat-elevation-z8">
 		<!--<mat-table *ngIf="iconsLoaded" [dataSource]="dataSource" matSort>-->
 		<mat-table [dataSource]="dataSource" matSort>	
@@ -62,10 +82,10 @@
 			  <ng-container matColumnDef="action">
 				<mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
 				<mat-cell *matCellDef="let row; let i=index;">					
-				<button disabled="{{!isCurrentUserSupervisor}}" *ngIf="!row.supervisor" mat-icon-button color="primary" (click)="assignAsReportee(row)">
+				<button disabled="{{!currentUser.isSupervisor}}" *ngIf="!row.supervisor" mat-icon-button color="primary" (click)="assignAsReportee(row)">
 					<mat-icon title="Assign as Reportee">how_to_reg</mat-icon>
 				</button>
-				<button disabled="{{!isCurrentUserSupervisor}}" *ngIf="row.supervisor && row.supervisor.username == currentUser" mat-icon-button color="primary" (click)="removeReportee(row)">
+				<button disabled="{{!currentUser.isSupervisor}}" *ngIf="row.supervisor && row.supervisor.username == currentUser.username" mat-icon-button color="primary" (click)="removeReportee(row)">
 					<mat-icon title="Remove Reportee">person_add_disabled</mat-icon>
 				</button>
 				<!--	
@@ -82,7 +102,7 @@
 
 			  <ng-container matColumnDef="status">
 					<mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-					<mat-cell *matCellDef="let row"> {{row.username == currentUser ? 'Self' : (row.supervisor && row.supervisor.username == currentUser ? 'Reportee' : 'Non-Reportee')}} </mat-cell>
+					<mat-cell *matCellDef="let row"> {{row.username == currentUser.username ? 'Self' : (row.supervisor && row.supervisor.username == currentUser.username ? 'Reportee' : 'Non-Reportee')}} </mat-cell>
 			  </ng-container>
 	  
 		  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

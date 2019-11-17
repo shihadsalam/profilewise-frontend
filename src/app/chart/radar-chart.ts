@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../service/user.service';
 import { RadarDataSet } from './radar-chart-data';
+import { User } from '../user/user';
 
 declare var jsPDF: any;
 @Component({
@@ -11,7 +12,6 @@ declare var jsPDF: any;
 export class RadarChartComponent implements OnInit{
 
   reportees: String[] = [];
-  currentUser: string = "";
   reportee: string = "";
   fieldType: String = "";
   profileFieldTypes: String[] = [];
@@ -19,18 +19,24 @@ export class RadarChartComponent implements OnInit{
   radarChartLabels: String[] = [];
   radarChartData: RadarDataSet[] = [];
   radarChartType: String = "radar";
+  currentUser: User;
 
   constructor(private userService: UserService, private router: Router, 
     private route: ActivatedRoute, private snackBar: MatSnackBar) { 
-      route.params.subscribe(params => {
-        this.currentUser = params['username'];
-        this.userService.getReportees(this.currentUser)
-          .subscribe(data => {
-            data.forEach(each => {
-                this.reportees.push(each.username);
+      this.currentUser = userService.getCurrentUser();
+      if(this.currentUser.isSupervisor) {
+        route.params.subscribe(params => {
+          this.userService.getReportees()
+            .subscribe(data => {
+              data.forEach(each => {
+                  this.reportees.push(each.username);
+              });
             });
-          });
-      });
+        });
+      }
+      else {
+        this.populateFieldSet(this.currentUser.username);
+      }
   }
 
   populateFieldSet(reportee) {

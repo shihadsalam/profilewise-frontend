@@ -71,7 +71,7 @@
 								<td>
 									<div [formGroup]="editUserForm">
 										<mat-form-field> <mat-label>Role</mat-label>
-										<mat-select placeholder="Role" formControlName="userRole"
+										<mat-select disabled placeholder="Role" formControlName="userRole"
 											name="userRole" id="userRole" [(ngModel)]="user.userRole">
 										<mat-option *ngFor="let userRole of roles" [value]="userRole">{{userRole}}</mat-option>
 										</mat-select> <mat-error *ngIf="hasUserError('userRole', 'required')">Role
@@ -82,7 +82,7 @@
 							<tr>
 								<td>
 									<div [formGroup]="editUserForm">
-										<mat-checkbox placeholder="Supervisor" formControlName="isSupervisor"
+										<mat-checkbox disabled placeholder="Supervisor" formControlName="isSupervisor"
 											id="isSupervisor" name="isSupervisor" [(ngModel)]="user.isSupervisor">Supervisor</mat-checkbox>
 									</div>
 								</td>

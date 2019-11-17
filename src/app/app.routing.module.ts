@@ -29,10 +29,10 @@ const routes: Routes = [
     { path: 'addProfileFields/:username', component: AddProfileFieldsComponent },
     { path: 'viewProfileFields/:username', component: ViewProfileFieldsComponent },
       //Chart Routes
-    {path: 'bar-chart/:username', component: BarChartComponent},
-    {path: 'doughnut-chart/:username', component: DoughnutChartComponent},
-    {path: 'radar-chart/:username', component: RadarChartComponent},
-    {path: 'pie-chart/:username', component: PieChartComponent}
+    {path: 'bar-chart', component: BarChartComponent},
+    {path: 'doughnut-chart', component: DoughnutChartComponent},
+    {path: 'radar-chart', component: RadarChartComponent},
+    {path: 'pie-chart', component: PieChartComponent}
 ];
 
 @NgModule({

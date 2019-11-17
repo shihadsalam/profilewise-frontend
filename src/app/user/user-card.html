@@ -1,9 +1,18 @@
 <div *ngIf="showUserDropdown">
-	<mat-form-field>
-			<mat-select placeholder="User">
-			<mat-option *ngFor="let usr of usersDropdown" (click)="userSelected(usr)" [(ngModel)]="usr" ngDefaultControl name="usr" [value]="usr">{{ usr.username }}</mat-option>
-			</mat-select>
-	</mat-form-field>
+		<table>
+				<tr>
+					<td>
+						<mat-icon style="font-size: 20px">search</mat-icon>
+					</td>
+					<td>
+							<mat-form-field>
+									<mat-select placeholder="User">
+									<mat-option *ngFor="let usr of usersDropdown" (click)="userSelected(usr)" [(ngModel)]="usr" ngDefaultControl name="usr" [value]="usr">{{ usr.username }}</mat-option>
+									</mat-select>
+							</mat-form-field>
+					</td>
+				</tr>
+		</table>	
 </div>
 <br>
 <table class="table">
@@ -23,7 +32,7 @@
 
 								<button style='margin-right:16px' mat-raised-button color="primary" [matMenuTriggerFor]="menu2">Profile</button>
 								<mat-menu #menu2="matMenu" overlapTrigger="false">
-										<button mat-menu-item [routerLink]="['/addProfileFields', user.username]">Configure Fields</button>
+										<button *ngIf="currentUser.isSupervisor" mat-menu-item [routerLink]="['/addProfileFields', user.username]">Configure Fields</button>
 										<button mat-menu-item (click)="openProfileDialog(user.username);">View Data</button>
 										<button mat-menu-item [routerLink]="['/addProfileRecords', user.username]">Add Data</button>
 								 </mat-menu>

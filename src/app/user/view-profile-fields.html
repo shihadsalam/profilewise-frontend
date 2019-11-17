@@ -1,11 +1,20 @@
 
 <form [formGroup]="viewProfileFieldsForm" autocomplete="off" novalidate
 fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
-<br>
-<h6>
-	Profile Fields for <strong>{{username}}</strong>
-</h6>
-<br>
+
+<table>
+		<tr>
+			<td>
+					<mat-icon style="font-size: 40px">toc</mat-icon>
+			</td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<td>
+					<h6>
+							Download Profile Fields for <strong>{{username}}</strong>
+					</h6>
+			</td>
+		</tr>
+</table>
 <mat-card> <mat-card-content>
 <form>
 	<div [formGroup]="viewProfileFieldsForm">
@@ -16,7 +25,6 @@ fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
 			<mat-option *ngFor="let profileFieldType of profileFieldTypes" (click)="populate(profileFieldType)" [value]="profileFieldType">{{profileFieldType}}</mat-option>
 		</mat-select></mat-form-field>
 	</div>
-	<br>
 	<br>
 	<table style="width: 400px" class="table mat-table table-striped table-bordered">
 		<thead>

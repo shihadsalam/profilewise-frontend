@@ -5,20 +5,22 @@
 			<img class="png-icon"  src="/assets/images/profile-icon.png" style="height: 65px;width:20%;">
 			ProfileWise
 		</span>
-		<button mat-button *ngIf="!authService.isUserLoggedIn()" routerLink="/login">Login</button>
-		<button mat-button *ngIf="!authService.isUserLoggedIn()" routerLink="/addUser">SignUp</button>	
-		<button mat-button *ngIf="authService.isUserLoggedIn()" routerLink="/users">Home</button>	
-		<button mat-button *ngIf="authService.isUserLoggedIn()" routerLink="/userCard">Profiles</button>		
+		<button mat-button *ngIf="!this.authService.isUserLoggedIn()" routerLink="/login">Login</button>
+		<button mat-button *ngIf="!this.authService.isUserLoggedIn()" routerLink="/addUser">SignUp</button>	
+		<button mat-button *ngIf="this.authService.isUserLoggedIn() && userService.getCurrentUser().isSupervisor" routerLink="/users">Home</button>	
+		<button mat-button *ngIf="this.authService.isUserLoggedIn() && userService.getCurrentUser().isSupervisor" routerLink="/userCard">Profiles</button>	
+		<button mat-button *ngIf="this.authService.isUserLoggedIn() && !userService.getCurrentUser().isSupervisor" routerLink="/userCard">Home</button>
 		
-		<button *ngIf="authService.isUserLoggedIn()" mat-button [matMenuTriggerFor]="menu">Charts</button>
+		
+		<button *ngIf="this.authService.isUserLoggedIn()" mat-button [matMenuTriggerFor]="menu">Charts</button>
 		<mat-menu #menu="matMenu" overlapTrigger="false">
-			   <button mat-menu-item [routerLink]="['/bar-chart', username]">Bar Chart</button>
-			   <button mat-menu-item [routerLink]="['/doughnut-chart', username]">Doughnut Chart</button>
-			   <button mat-menu-item [routerLink]="['/radar-chart', username]">Radar Chart</button>
-			   <button mat-menu-item [routerLink]="['/pie-chart', username]">Pie Chart</button>
+			   <button mat-menu-item routerLink="/bar-chart">Bar Chart</button>
+			   <button mat-menu-item routerLink="/doughnut-chart">Doughnut Chart</button>
+			   <button mat-menu-item routerLink="/radar-chart">Radar Chart</button>
+			   <button mat-menu-item routerLink="/pie-chart">Pie Chart</button>
 		 </mat-menu>
 		
-		<button mat-button *ngIf="authService.isUserLoggedIn()" routerLink="/logout">Logout</button>
+		<button mat-button *ngIf="this.authService.isUserLoggedIn()" routerLink="/logout">Logout</button>
 	</mat-toolbar-row>
 </mat-toolbar>
 <br/>

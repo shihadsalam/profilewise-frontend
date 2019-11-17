@@ -41,14 +41,13 @@ export class UserComponent {
   action: string;
   deletedUser: User;
   errorMsg: string;
-  currentUser: string = "";
-  isCurrentUserSupervisor: boolean = false;
+  currentUser: User;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private userService: UserService, private token: TokenStorage, private snackBar: MatSnackBar,
     private domSanitizer: DomSanitizer, private matIconRegistry: MatIconRegistry, 
     private http: HttpClient, private dialog: MatDialog) {
-      this.currentUser = token.getCurrentUser();
+      this.currentUser = userService.getCurrentUser();
       route.params.subscribe(params => {
       this.msg = params['msg'];
       this.errorMsg = params['errorMsg'];
@@ -71,7 +70,6 @@ export class UserComponent {
         this.dataSource = new MatTableDataSource(this.users);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        this.isSupervisor();
         //this.addUserIcons();
     });
 
@@ -124,7 +122,7 @@ export class UserComponent {
           this.openSnackBar(data.errorMsg, "Error! ");
         }
         else if (data.msg) {
-          this.userService.getUsers().subscribe(userList => {
+          this.userService.getAuthorizedUsers().subscribe(userList => {
             this.users = userList;
             this.dataSource.data = this.users;
             this.openSnackBar(data.msg, "Success! ");
@@ -141,7 +139,7 @@ export class UserComponent {
           this.openSnackBar(data.errorMsg, "Error! ");
         }
         else if (data.msg) {
-            this.userService.getUsers().subscribe(userList => {
+            this.userService.getAuthorizedUsers().subscribe(userList => {
             this.users = userList;
             this.dataSource.data = this.users;
             this.openSnackBar(data.msg, "Success! ");
@@ -149,14 +147,6 @@ export class UserComponent {
         }
       }
     );
-  }
-
-  isSupervisor(): void {
-    this.users.forEach(user => {
-      if (this.currentUser == user.username && user.isSupervisor) {
-        this.isCurrentUserSupervisor = true;
-      }
-    });
   }
 
 // TODO

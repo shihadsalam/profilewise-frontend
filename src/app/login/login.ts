@@ -62,8 +62,13 @@ export class LoginComponent implements OnInit{
                         this.openSnackBar(data.errorMsg, "Error! ");
                     }
                     else {
-                        this.token.saveToken(data.token, this.loginUser.username);
-                        this.router.navigate(['users']);
+                        this.token.saveToken(data.token, data.currentUser);
+                        if (data.currentUser.isSupervisor) {
+                            this.router.navigate(['users']);
+                        }
+                        else {
+                            this.router.navigate(['userCard', {username: this.loginUser.username}]);
+                        }
                     }
                 }
             );

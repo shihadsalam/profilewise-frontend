@@ -16,6 +16,7 @@ export class UserCardComponent {
     users: User[] = [];
     usersDropdown: User[] = [];
     user: User;
+    currentUser: User;
     page = 1;
     pageSize = 1;
     msg: string;
@@ -29,6 +30,7 @@ export class UserCardComponent {
     constructor(private router: Router, private route: ActivatedRoute, private token: TokenStorage, 
         private snackBar: MatSnackBar, private userService: UserService, private dialog: MatDialog) {
             this.dataSource = new MatTableDataSource();
+            this.currentUser = userService.getCurrentUser();
             //this.route.queryParams.subscribe(params => {
             this.route.params.subscribe(params => {
                 this.username = params.username;
@@ -48,7 +50,7 @@ export class UserCardComponent {
                         this.users = data;
                         this.dataSource.data = this.users;
                         this.usersDropdown = this.users;
-                        this.showUserDropdown = true;
+                        this.showUserDropdown = this.currentUser.isSupervisor ? true : false;
                     });
                 }
 

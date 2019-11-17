@@ -1,10 +1,22 @@
-<br>
-<h6>Bar Chart View</h6>
+<table>
+	<tr>
+		<td>
+				<mat-icon style="font-size: 40px">insert_chart_outlined</mat-icon>
+		</td>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<td *ngIf="currentUser.isSupervisor">
+				<h6>Bar Chart View</h6>
+		</td>
+		<td *ngIf="!currentUser.isSupervisor">
+				<h6>Bar Chart View - {{currentUser.firstName + ' ' + currentUser.lastName}}</h6>
+	    </td>
+	</tr>
+</table>
 <br>
 <div>
 	<table>
 		<tr>
-			<td>
+			<td *ngIf="currentUser.isSupervisor">
 					<mat-form-field>
 							<mat-select placeholder="Reportee">
 							  <mat-option *ngFor="let reportee of reportees" (click)="populateFieldSet(reportee)" [value]="reportee">{{ reportee }}</mat-option>

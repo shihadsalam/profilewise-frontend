@@ -8,6 +8,7 @@ import { BarChartData } from '../chart/bar-chart-data';
 import { DoughnutChartData } from '../chart/doughnut-chart-data';
 import { PieChartData } from '../chart/pie-chart-data';
 import { RadarChartData } from '../chart/radar-chart-data';
+import { TokenStorage } from './token.storage';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,12 +17,16 @@ const httpOptions = {
 @Injectable()
 export class UserService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private token: TokenStorage) { }
 
     private userUrl = 'http://localhost:8088/users';
     private userProfileUrl = 'http://localhost:8088/user-profile';
     private chartUrl = 'http://localhost:8088/user-chart';
     //private userUrl = '/users';
+
+    public getCurrentUser(): User {
+        return JSON.parse(this.token.getCurrentUser());
+    }
 
     public getUsers() {
         return this.http.get<User[]>(this.userUrl);
@@ -55,8 +60,8 @@ export class UserService {
         return this.http.post<Message>(this.userUrl + "/assign-reportee", user);
     }
 
-    public getReportees(username) {
-        return this.http.get<User[]>(this.userUrl + "/get-reportees/" + username);
+    public getReportees() {
+        return this.http.get<User[]>(this.userUrl + "/get-reportees" );
     }
 
     public removeReportee(user) {
